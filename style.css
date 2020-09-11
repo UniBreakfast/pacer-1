@@ -1,0 +1,156 @@
+body, input {
+    font: 18px Trebuchet MS;
+}
+body {
+    background-color: #1a1616;
+}
+input {
+    background-color: #201f1f;
+    color: #bbb;
+    border: 1px solid;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 3px;
+}
+input[type=date] {
+    width: 150px;
+}
+input[type=number] {
+    width: 60px;
+}
+::-webkit-calendar-picker-indicator {
+    filter: invert(0.7);
+}
+ul {
+    list-style: none;
+}
+button, summary {
+    cursor: pointer;
+}
+button {
+    background: none;
+    border: 1px solid;
+    border-radius: 10px;
+}
+#activityView {
+    margin: auto;
+    width: 500px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+#activityView summary {
+    outline: none;
+    margin: 4px;
+}
+#activityView>details>div {
+    display: flex;
+}
+#activityView input {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 1px;
+    font-size: 16px; 
+}
+#activityView input:first-child {
+    width: 40%;
+}
+#activityView input:nth-child(2) {
+    width: 25%;
+}
+#activityView input:nth-child(3) {
+    width: 25%;
+}
+#activityView details button {
+    color: #fcd582;
+}
+
+#activityList {
+    margin: auto;
+    padding: 0;
+}
+#activityList details, #activityView details {
+    display: flex;
+    width: 400px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #423603;
+    color: #f0c76f;
+    padding: 5px 10px;
+    margin: 5px;
+}
+#activityList summary {
+    display: flex;
+    align-items: center;
+}
+#activityList summary::-webkit-details-marker {
+    display:none;
+}
+#activityList span:first-child {
+    width: 60%;
+}
+
+#activityList span:nth-child(2) {
+    width: 30%;
+}
+#activityList span:last-child {
+    width: 10%;
+}
+#activityList button {
+    margin: 0 10px;
+}
+#confidenceView {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border: 1px;
+    border-radius: 50%;
+    background-color: #c9ae57;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+.glass {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.modal {
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 10px 20px;
+    line-height: 2;
+}
+.modal>div, details>div {
+    text-align: center;
+
+}
+#getQuestModal {
+    width: 500px;
+    background-color: #044704;
+    color: #18d328;
+}
+#getQuestModal button {
+    color: #8fe296;
+}
+#alertModal {
+    width: 300px;
+    background-color: #a75f5f;
+    color: #2b0909;
+    line-height: unset;
+}
+
+[hidden] {
+    display: none !important;
+}
