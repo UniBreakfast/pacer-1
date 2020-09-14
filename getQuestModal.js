@@ -1,3 +1,4 @@
+const MS_IN_DAY = 24*60*60*1000 // кількість мілісекунд у добі
 // функція для взяття квесту у модальному вікні
 getQuestGlass.onclick = event => { 
     if (event.target == getQuestGlass || event.target.innerText == 'Відмінити') {
@@ -5,22 +6,29 @@ getQuestGlass.onclick = event => {
     }
 }
 // змінні для функцій з відкладеним запуском і ідентифікатора таймера
-let nextHandleDateChange, nextHandleTimer
+let nextHandleChange, nextHandleTimer
+// відкладений виклик на зміну першого інпута
+questFromInput.onchange = throttle(handleChangeFrom)
+// відкладений виклик на зміну другого інпута
+questToInput.onchange = throttle(handleChangeTo)
+// відкладений виклик на зміну 3-ого інпута
+questDurationInput.oninput = throttle(handleChangeDuration)
 
-questFromInput.onchange = () => {
-    if (nextHandleDateChange && nextHandleDateChange != handleChangeFrom) {
-        nextHandleDateChange()
+questPledgeInput.oninput = throttle(handleChangePledge)
+// функція для відкладеного запуску оброблених інпутів
+function throttle(handler) {
+    return () => {
+        if (nextHandleChange && nextHandleChange != handler) {
+            nextHandleChange()
+        }
+        nextHandleChange = handler
+        clearTimeout(nextHandleTimer)
+        nextHandleTimer = setTimeout(() => {
+            nextHandleChange()
+            nextHandleChange = null
+        }, 1000)
     }
-    nextHandleDateChange = handleChangeFrom
-    clearTimeout(nextHandleTimer)
-    nextHandleTimer = setTimeout(() => {
-        nextHandleDateChange()
-        nextHandleDateChange = null
-    }, 1000)
 }
-questToInput.onchange = handleChangeTo
-questDurationInput.onchange = handleChangeDuration
-questPledgeInput.onchange = handleChangePledge
 
 // показ модального вікна з розрахунками параметрів квесту
 function showGetQuestModal(activityID) {
@@ -68,14 +76,58 @@ function prepGetQuestModal(activity) {
     questToInput.value = dateToISO(date)
 
 }
-
+// функція для зміни інпутів відповідно до зміни першого інпута з початковою датою
 function handleChangeFrom() {
+    let date = new Date
     if (questFromInput.value < questFromInput.min) {
         questFromInput.value = questFromInput.min
     } else if (questFromInput.value > questFromInput.max) {
         questFromInput.value = questFromInput.max
     }
+    if (questDurationInput.value == 1 && questFromInput.value == dateToISO(date)) {
+        date.setDate(date.getDate() + 1)
+        questFromInput.value = dateToISO(date)
+    }
+    date = new Date(questFromInput.value)
+    date.setDate(date.getDate() + (questDurationInput.value - 1))
+    questToInput.value = dateToISO(date)
 }
-function handleChangeTo() {}
-function handleChangeDuration() {}
-function handleChangePledge() {}
+// функція для зміни інпутів відповідно до зміни другого інпута з кінцевою датою
+function handleChangeTo() {
+    const date = new Date(questFromInput.value)
+    date.setDate(date.getDate() + (questDurationInput.max - 1))
+    if (questToInput.value < questFromInput.value) {
+        questToInput.value = questFromInput.value
+    } else if (questToInput.value > dateToISO(date)) {
+        questToInput.value = dateToISO(date)
+    }
+    questDurationInput.value = (new Date(questToInput.value) - new Date(questFromInput.value))/MS_IN_DAY+1
+    questPledgeInput.value = questDurationInput.value * questPledgeInput.min
+}
+// функція для зміни інпутів відповідно до зміни тривалості квесту (всього днів)
+function handleChangeDuration() {
+    if (+questDurationInput.value < +questDurationInput.min) {
+        questDurationInput.value = questDurationInput.min
+    } else if (+questDurationInput.value > +questDurationInput.max) {
+        questDurationInput.value = questDurationInput.max
+    }
+    const date = new Date(questFromInput.value)
+    date.setDate(date.getDate() + (questDurationInput.value - 1))
+    questToInput.value = dateToISO(date)
+    questPledgeInput.value = questDurationInput.value * questPledgeInput.min 
+
+}
+//функція для зміни інпутів відповідно до кількості очок
+function handleChangePledge() {
+    if (+questPledgeInput.value < +questPledgeInput.min) {
+        questPledgeInput.value = questPledgeInput.min
+    } else if (+questPledgeInput.value > +questPledgeInput.max) {
+        questPledgeInput.value = questPledgeInput.max
+    }
+    questDurationInput.value = Math.floor(questPledgeInput.value / questPledgeInput.min)
+    questPledgeInput.value = questDurationInput.value * questPledgeInput.min 
+    const date = new Date(questFromInput.value)
+    date.setDate(date.getDate() + (questDurationInput.value - 1))
+    questToInput.value = dateToISO(date)
+
+}
