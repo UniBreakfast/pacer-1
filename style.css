@@ -32,14 +32,16 @@ button {
     border: 1px solid;
     border-radius: 10px;
 }
-#activityView {
+
+#activityView, #questView {
     margin: auto;
     width: 500px;
     display: flex;
     flex-flow: column;
     align-items: center;
 }
-#activityView summary {
+#activityView summary, #questView summary {
+    justify-content: space-between;
     outline: none;
     margin: 4px;
 }
@@ -65,40 +67,55 @@ button {
     color: #fcd582;
 }
 
-#activityList {
+.brick-list {
     margin: auto;
     padding: 0;
 }
-#activityList details, #activityView details {
+.brick-list details, #activityView details {
     display: flex;
     width: 400px;
     border: 1px solid black;
     border-radius: 10px;
-    background-color: #423603;
-    color: #f0c76f;
     padding: 5px 10px;
     margin: 5px;
-}
-#activityList summary {
+
+} 
+.brick-list summary {
     display: flex;
     align-items: center;
 }
-#activityList summary::-webkit-details-marker {
+.brick-list summary::-webkit-details-marker {
     display:none;
 }
-#activityList span:first-child {
+#activityList details, #activityView details {
+    background-color: #423603;
+    color: #f0c76f;
+}
+#activityList span:first-child, #questList span:first-child {
     width: 60%;
 }
 
-#activityList span:nth-child(2) {
+#activityList span:nth-child(2), #questList span:nth-child(2) {
     width: 30%;
 }
-#activityList span:last-child {
+#activityList span:nth-child(3), #questList span:nth-child(3) {
     width: 10%;
 }
 #activityList button {
     margin: 0 10px;
 }
+#questList details {
+    background-color: #044704;
+    color: #18d328;
+}
+#questList summary {
+    flex-wrap: wrap;
+}
+#questList span:nth-child(n+4) {
+    font-size: 16px;
+    margin: 4px 0;
+}
+
 #confidenceView {
     position: absolute;
     top: 5px;
@@ -136,12 +153,22 @@ button {
     text-align: center;
 
 }
-#getQuestModal {
+
+#todoModal, #getQuestModal {
     width: 500px;
     background-color: #044704;
     color: #18d328;
 }
-#getQuestModal button {
+#todoList li {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#todoList span:nth-child(2) {
+    width: 60%;
+}
+#getQuestModal button, #questList button {
     color: #8fe296;
 }
 #alertModal {
@@ -150,7 +177,20 @@ button {
     color: #2b0909;
     line-height: unset;
 }
-
+#dateTimeView {
+    position: absolute;
+    top: 10px;
+    right: 70px;
+}
+#dateTimeView h3 {
+    margin: 2px;
+    text-align: center;
+}
+#toolbar {
+    position: absolute;
+    top: 65px;
+    right: 20px;
+}
 [hidden] {
     display: none !important;
 }

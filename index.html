@@ -1,61 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <script src="todoModal.js" defer></script>
     <script src="getQuestModal.js" defer></script>
     <script src="script.js" defer></script>
+    
 </head>
+
 <body>
-    
-<section id="activityView">
-    <details>
-        <summary>Додати діяльність</summary>
-        <div>
-            <input id="nameInput" type="text" placeholder="Діяльність">
-            <input id="sizeInput" type="text" placeholder="Міра">
-            <input id="diffInput" type="number" placeholder="Складність">
-            <button id="saveNewActivityBtn">💾</button>
-        </div>
-    </details>
-    
-    <ul id="activityList">
 
-    </ul>
-</section>
+    <section id="activityView">
+        <details>
+            <summary>Додати діяльність</summary>
+            <div>
+                <input id="nameInput" type="text" placeholder="Діяльність">
+                <input id="sizeInput" type="text" placeholder="Міра">
+                <input id="diffInput" type="number" placeholder="Складність">
+                <button id="saveNewActivityBtn">💾</button>
+            </div>
+        </details>
 
-<div id="confidenceView"></div>
+        <ul id="activityList" class="brick-list"></ul>
+    </section>
 
-<div id="getQuestGlass" class="glass" hidden>
-    <div id="getQuestModal" class="modal">
-        <div>
-            <span></span>, <span></span>, складність <span></span>
-        </div>
-        <div>
-            Починаючи з <input id="questFromInput" type="date">
-            і до <input id="questToInput" type="date">
-        </div>
-        <div>
-            Всього днів <input id="questDurationInput" type="number" min="1">
-            із заставою <input id="questPledgeInput" type="number">
-        </div>
-        <div>
-            <button>Взяти квест</button>
-            <button>Відмінити</button>
+    <section id="questView">
+        <ul id="questList" class="brick-list"></ul>
+    </section>
+
+    <div id="confidenceView" title="Віра в себе"></div>
+    <div id="dateTimeView"></div>
+
+    <div id="toolbar"><button id="showTodoBtn">План на сьогодні</button></div>
+    <div id="todoGlass" class="glass" hidden>
+        <div id="todoModal" class="modal">
+            <ul id="todoList"></ul>
+            <div><button>Ok</button></div>
         </div>
     </div>
-</div>
 
-<div id="alertGlass" class="glass" hidden>
-    <div id="alertModal" class="modal">
-        <span id="alertMsg"></span>
-        <div>
-            <button>ok</button>
+    <div id="getQuestGlass" class="glass" hidden>
+        <div id="getQuestModal" class="modal">
+            <div>
+                <span></span>, <span></span>, складність <span></span>
+            </div>
+            <div>
+                Починаючи з <input id="questFromInput" type="date">
+                і до <input id="questToInput" type="date">
+            </div>
+            <div>
+                Всього днів <input id="questDurationInput" type="number" min="1">
+                із заставою <input id="questPledgeInput" type="number">
+            </div>
+            <div>
+                <button id="takeQuestBtn">Взяти квест</button>
+                <button>Відмінити</button>
+            </div>
         </div>
     </div>
-</div>
+
+
+    <div id="alertGlass" class="glass" hidden>
+        <div id="alertModal" class="modal">
+            <span id="alertMsg"></span>
+            <div>
+                <button>ok</button>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -63,4 +79,5 @@
 
 
 </body>
+
 </html>

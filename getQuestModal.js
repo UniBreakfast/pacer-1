@@ -75,6 +75,9 @@ function prepGetQuestModal(activity) {
     date.setDate(date.getDate() + duration - 1)
     questToInput.value = dateToISO(date)
 
+    // збереження ID при натисканні кнопки взяти квест
+    takeQuestBtn.dataset.id = activity.id
+
 }
 // функція для зміни інпутів відповідно до зміни першого інпута з початковою датою
 function handleChangeFrom() {
