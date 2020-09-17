@@ -14,19 +14,53 @@ showTodoBtn.onclick = () => {
 function showTodoModal() {
     todoGlass.hidden = false
 }
-// функція для побудови елемнту списку планів
+// функція для побудови елементу списку планів
 function buildTodoItem(todo) {
     const quest = quests.find(quest => quest.id == todo.questID)    
     const activity = activities.find(activity => activity.id == quest.activityID)    
     return `
-        <li>
-            <input type="checkbox" ${todo.status == 'done' ? 'checked' : ''}>
+        <li class="${todo.status}">
+            ${todo.status == 'done' ? '<span>✔️</span>' 
+            : (todo.status == 'failed' ? '<span>❌</span>' 
+            : '<button>✔️</button><button>❌</button>')}
+            ${todo.status == 'planed' ? '' : '<div></div>'}
             <span>${activity.name}</span>
             <span>${activity.size}</span>
             <span>+${todo.confidence}</span>
         </li>
     `
 }
+// function buildTodoItem(todo) {
+//     const quest = quests.find(quest => quest.id == todo.questID)    
+//     const activity = activities.find(activity => activity.id == quest.activityID)    
+//     if (todo.status == 'planed') return `
+//         <li>
+//             <button>✔️</button>
+//             <button>❌</button>
+//             <span>${activity.name}</span>
+//             <span>${activity.size}</span>
+//             <span>+${todo.confidence}</span>
+//         </li>
+//     `
+//     if (todo.status == 'done') return `
+//         <li class="done">
+//             <span>✔️</span>
+//             <div></div>
+//             <span>${activity.name}</span>
+//             <span>${activity.size}</span>
+//             <span>+${todo.confidence}</span>
+//         </li>
+//     `
+//     if (todo.status == 'failed') return `
+//         <li class="failed">
+//             <span>❌</span>
+//             <div></div>
+//             <span>${activity.name}</span>
+//             <span>${activity.size}</span>
+//             <span>+${todo.confidence}</span>
+//         </li>
+//     `
+// }
 // функція для виводу планів на сьогодні
 function showTodoToday() {
     todoList.innerHTML = todos.filter(todo => todo.date == dateToISO(new Date))

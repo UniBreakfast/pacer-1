@@ -157,17 +157,37 @@ button {
 #todoModal, #getQuestModal {
     width: 500px;
     background-color: #044704;
-    color: #18d328;
+    color: #9edfa3;
 }
 #todoList li {
     width: 400px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+}
+#todoList .failed {
+    color: red;
+}
+#todoList .done {
+    color: lime;
 }
 #todoList span:nth-child(2) {
     width: 60%;
 }
+#todoList div {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+}
+#todoList .failed div {
+    background-color: red;
+}
+#todoList .done div {
+    background-color: lime;
+}
+
+
 #getQuestModal button, #questList button {
     color: #8fe296;
 }

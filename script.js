@@ -18,7 +18,6 @@ const todos = [
     {id: 8, questID: 4, date: '2020-09-15', confidence: 1, status: 'done'},
     {id: 9, questID: 4, date: '2020-09-16', confidence: 1, status: 'planned'},
     {id: 10, questID: 4, date: '2020-09-17', confidence: 2, status: 'planned'},
-    {id: 10, questID: 4, date: '2020-09-17', confidence: 2, status: 'done'},
     {id: 11, questID: 4, date: '2020-09-18', confidence: 2, status: 'planned'},
     {id: 12, questID: 4, date: '2020-09-19', confidence: 2, status: 'planned'},
     {id: 13, questID: 4, date: '2020-09-20', confidence: 2, status: 'planned'},
