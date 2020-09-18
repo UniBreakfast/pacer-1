@@ -54,15 +54,17 @@ function setTodoStatus(todoID, status) {
     const quest = quests.find(quest => quest.id == todo.questID)
     if (status == 'done') {
         quest.done++
-        confidence += todo.confidence
+        confidence(todo.confidence)
         if (quest.done == quest.total) {
             quest.status = 'done'
-            confidence += quest.confidence
+            confidence(quest.confidence)
         }
     } else {
         quest.status = 'failed'
         todos.filter(todo => todo.questID == quest.id && todo.status == 'planned')
             .forEach(todo => todo.status = 'canceled')
     }
-
+    // зберігаю зміни в планах та квестах заново в localStorage
+    localStorage.todos = JSON.stringify(todos)
+    localStorage.quests = JSON.stringify(quests)
 }

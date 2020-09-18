@@ -1,30 +1,3 @@
-// для збільшення значень ID
-let nextID = 1
-
-// показник віри в себе (кількість очок)
-let confidence = 50 
-
-// масив обєктів для зберігання видів діяльності
-const activities = [
-    {id: nextID++, name: 'Програмування', size: '2 години', diff: 2},
-    {id: nextID++, name: 'Англійська', size: '2 години', diff: 5},
-    {id: nextID++, name: 'Фізкультура', size: '1 година', diff: 9},
-]
-//масив обєктів для зберігання квестів
-const quests = [
-    {id: nextID++, activityID: 1, from: '2020-09-14', to: '2020-09-20',
-    done: 2, total: 7, confidence: 14, status: 'ongoing'},
-]
-// плани на виконання квесту
-const todos = [
-    {id: nextID++, questID: 4, date: '2020-09-14', confidence: 1, status: 'done'},
-    {id: nextID++, questID: 4, date: '2020-09-15', confidence: 1, status: 'done'},
-    {id: nextID++, questID: 4, date: '2020-09-16', confidence: 1, status: 'done'},
-    {id: nextID++, questID: 4, date: '2020-09-17', confidence: 2, status: 'done'},
-    {id: nextID++, questID: 4, date: '2020-09-18', confidence: 2, status: 'planned'},
-    {id: nextID++, questID: 4, date: '2020-09-19', confidence: 2, status: 'planned'},
-    {id: nextID++, questID: 4, date: '2020-09-20', confidence: 2, status: 'planned'},
-]
 //обєкт для перетворення статусу з інгл на укр
 const statusUKR = {done: 'завершено', ongoing: 'триває', failed: 'провалено'}
 
@@ -113,7 +86,7 @@ function showActivities() {
     activityList.querySelectorAll('button').forEach(btn => {
         if (btn.innerText.trim() == 'Взяти квест') {
             btn.onclick = () => {
-                if (confidence >= +btn.dataset.diff) showGetQuestModal(btn.dataset.id)
+                if (confidence() >= +btn.dataset.diff) showGetQuestModal(btn.dataset.id)
                 else showAlert('Недостатньо віри в себе на цей квест')
             }
         }
@@ -130,12 +103,14 @@ function showQuests() {
 function saveNewActivity() {
     if (nameInput.value && sizeInput.value && diffInput.value) {
         const newActivity = {
-            id: nextID++,
+            id: newID(),
             name: nameInput.value, 
             size: sizeInput.value, 
             diff: diffInput.value
         }
         activities.push(newActivity)
+        // записую масив діяльностей в localStorage
+        localStorage.activities = JSON.stringify(activities) 
         nameInput.value = ''
         sizeInput.value = ''
         diffInput.value = ''
@@ -147,7 +122,7 @@ function saveNewActivity() {
 // додається новий квест, новий план і закриваємо модальне вікно
 function takeNewQuest() {
     const newQuest = {
-        id: nextID++, 
+        id: newID(), 
         activityID: takeQuestBtn.dataset.id, 
         from: questFromInput.value, 
         to: questToInput.value,
@@ -156,13 +131,16 @@ function takeNewQuest() {
         confidence: +questPledgeInput.value, 
         status: 'ongoing'
     }
-    confidence -= newQuest.confidence
+    confidence(-newQuest.confidence)
     quests.push(newQuest)
+    // записую масив квестів в localStorage
+    localStorage.quests = JSON.stringify(quests)
+    
     for (let i = 0; i < newQuest.total; i++) {
         const date = new Date(newQuest.from)
         date.setDate(date.getDate() + i)
         const newTodo = {
-            id: nextID++,
+            id: newID(),
             questID: newQuest.id,
             date: dateToISO(date),
             confidence: Math.floor((i+1)**0.5),
@@ -170,6 +148,9 @@ function takeNewQuest() {
         }
         todos.push(newTodo)
     }
+    // записую масив планів в localStorage
+    localStorage.todos = JSON.stringify(todos)
+
     getQuestGlass.hidden = true //закримаэмо модалку  
 }
 
@@ -187,7 +168,7 @@ function closeOtherDetails(event) {
 
 // вивід показника віри в себе на екрані 
 function showConfidence() {
-    confidenceView.innerText = confidence
+    confidenceView.innerText = confidence()
 }
 
 // функція для запису дати у стандартному форматі ISO
@@ -225,4 +206,17 @@ function getCurrentTime() {
     if (hour < 10) hour = '0' + hour
     if (minute < 10) minute = '0' + minute
     return `${hour}:${minute}`
+}
+//функція для створення id з локалстореджа
+function newID() {
+    const nextID = +localStorage.nextID
+    localStorage.nextID = nextID + 1
+    return nextID
+}
+//функція для читання, редагування показника віри в себе у локалсторедж
+function confidence(value) {
+    let confidence = +localStorage.confidence
+    if (value === undefined) return confidence
+    confidence += value
+    localStorage.confidence = confidence
 }

@@ -40,7 +40,7 @@ function showGetQuestModal(activityID) {
 }
 // функція для підготовки модального вікна
 function prepGetQuestModal(activity) {
-    const maxDuration = Math.floor(confidence / activity.diff)
+    const maxDuration = Math.floor(confidence() / activity.diff)
     const duration = Math.floor((maxDuration+1)/2)
     let date = new Date
     const spans = getQuestModal.querySelectorAll('span')
