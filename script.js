@@ -7,9 +7,11 @@ const activities = [
 //масив обєктів для зберігання квестів
 const quests = [
     {id: 4, activityID: 1, from: '2020-09-14', to: '2020-09-20',
-    done: 2, total: 7, reward: 14, status: 'ongoing'},
+    done: 2, total: 7, confidence: 14, status: 'ongoing'},
     {id: 5, activityID: 3, from: '2020-09-12', to: '2020-09-12',
-    done: 1, total: 1, reward: 5, status: 'done'},
+    done: 1, total: 1, confidence: 5, status: 'done'},
+    {id: 14, activityID: 2, from: '2020-09-16', to: '2020-09-17',
+    done: 1, total: 2, confidence: 10, status: 'ongoing'},
 ]
 // плани на виконання квесту
 const todos = [
@@ -21,6 +23,9 @@ const todos = [
     {id: 11, questID: 4, date: '2020-09-18', confidence: 2, status: 'planned'},
     {id: 12, questID: 4, date: '2020-09-19', confidence: 2, status: 'planned'},
     {id: 13, questID: 4, date: '2020-09-20', confidence: 2, status: 'planned'},
+    {id: 15, questID: 14, date: '2020-09-16', confidence: 1, status: 'done'},
+    {id: 16, questID: 14, date: '2020-09-17', confidence: 1, status: 'planned'},
+
 ]
 //обєкт для перетворення статусу з інгл на укр
 const statusUKR = {done: 'завершено', ongoing: 'триває', failed: 'провалено'}
@@ -92,7 +97,7 @@ function buildQuestItem(quest) {
                     <span title="дата початку">з ${isoToGOST(quest.from)}</span>
                     <span title="можлива дата завершення">по ${isoToGOST(quest.to)}</span>
                     <span><span title="кількість днів виконання позаду">${quest.done}/</span><span title="передбачена тривалість квесту">${quest.total} днів</span></span>
-                    <span title="завдаток/винагорода по завершенню">${quest.reward}</span>
+                    <span title="завдаток/винагорода по завершенню">${quest.confidence}</span>
                     <span title="статус квесту">${statusUKR[quest.status]}</span>
                 </summary>
                 <div>
@@ -154,12 +159,11 @@ function takeNewQuest() {
         to: questToInput.value,
         done: 0, 
         total: questDurationInput.value, 
-        reward: questPledgeInput.value, 
+        confidence: questPledgeInput.value, 
         status: 'ongoing'
     }
-    confidence -= newQuest.reward
+    confidence -= newQuest.confidence
     quests.push(newQuest)
-
     getQuestGlass.hidden = true //закримаэмо модалку  
 }
 

@@ -5,9 +5,24 @@ todoGlass.onclick = event => {
         todoGlass.hidden = true
     }
 }
+// клік
 showTodoBtn.onclick = () => {
     showTodoToday()
     showTodoModal()
+}
+//клік на кнопку ок чи фолс
+todoList.onclick = event => {
+    if (event.target.tagName == 'BUTTON') {
+        // event.target.innerText == '✔️' 
+        //     ? setTodoStatus(event.target.parentElement.dataset.id, 'done') 
+        //     : setTodoStatus(event.target.parentElement.dataset.id, 'failed')
+        const status = event.target.innerText == '✔️'? 'done' : 'failed'
+        setTodoStatus(event.target.parentElement.dataset.id, status)
+        showConfidence()
+        showTodoToday()
+        showQuests()
+        showActivities()
+    } 
 }
 
 // функція для показу модального вікна з планами на сьогодні
@@ -19,7 +34,7 @@ function buildTodoItem(todo) {
     const quest = quests.find(quest => quest.id == todo.questID)    
     const activity = activities.find(activity => activity.id == quest.activityID)    
     return `
-        <li class="${todo.status}">
+        <li class="${todo.status}" data-id="${todo.id}">
             ${todo.status == 'done' ? '<span>✔️</span>' 
             : (todo.status == 'failed' ? '<span>❌</span>' 
             : '<button>✔️</button><button>❌</button>')}
@@ -30,39 +45,27 @@ function buildTodoItem(todo) {
         </li>
     `
 }
-// function buildTodoItem(todo) {
-//     const quest = quests.find(quest => quest.id == todo.questID)    
-//     const activity = activities.find(activity => activity.id == quest.activityID)    
-//     if (todo.status == 'planed') return `
-//         <li>
-//             <button>✔️</button>
-//             <button>❌</button>
-//             <span>${activity.name}</span>
-//             <span>${activity.size}</span>
-//             <span>+${todo.confidence}</span>
-//         </li>
-//     `
-//     if (todo.status == 'done') return `
-//         <li class="done">
-//             <span>✔️</span>
-//             <div></div>
-//             <span>${activity.name}</span>
-//             <span>${activity.size}</span>
-//             <span>+${todo.confidence}</span>
-//         </li>
-//     `
-//     if (todo.status == 'failed') return `
-//         <li class="failed">
-//             <span>❌</span>
-//             <div></div>
-//             <span>${activity.name}</span>
-//             <span>${activity.size}</span>
-//             <span>+${todo.confidence}</span>
-//         </li>
-//     `
-// }
 // функція для виводу планів на сьогодні
 function showTodoToday() {
     todoList.innerHTML = todos.filter(todo => todo.date == dateToISO(new Date))
         .map(buildTodoItem).join('')
 } 
+// функція для зміни статусу плану і кількості очок
+function setTodoStatus(todoID, status) {
+    const todo = todos.find(todo => todo.id == todoID)
+    todo.status = status
+    const quest = quests.find(quest => quest.id == todo.questID)
+    if (status == 'done') {
+        quest.done++
+        confidence += todo.confidence
+        if (quest.done == quest.total) {
+            quest.status = 'done'
+            confidence += quest.confidence
+        }
+    } else {
+        quest.status = 'failed'
+        todos.filter(todo => todo.questID == quest.id && todo.status == 'planned')
+            .forEach(todo => todo.status = 'canceled')
+    }
+
+}

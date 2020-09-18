@@ -177,8 +177,9 @@ button {
 }
 #todoList div {
     position: absolute;
-    width: 100%;
+    width: 90%;
     height: 3px;
+    right: 0;
 }
 #todoList .failed div {
     background-color: red;
