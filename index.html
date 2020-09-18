@@ -10,7 +10,7 @@
     <script src="todoModal.js" defer></script>
     <script src="getQuestModal.js" defer></script>
     <script src="script.js" defer></script>
-    
+
 </head>
 
 <body>
@@ -36,7 +36,11 @@
     <div id="confidenceView" title="Віра в себе"></div>
     <div id="dateTimeView"></div>
 
-    <div id="toolbar"><button id="showTodoBtn">План на сьогодні</button></div>
+    <div id="toolbar">
+        <button id="showTodoBtn">План на сьогодні</button>
+        <button id="reportBtn">Звіти</button>
+    </div>
+
     <div id="todoGlass" class="glass" hidden>
         <div id="todoModal" class="modal">
             <ul id="todoList"></ul>
@@ -44,6 +48,12 @@
         </div>
     </div>
 
+    <div id="reportGlass" class="glass">
+        <div id="reportModal" class="modal">
+            <ul></ul>
+        </div>
+    </div>
+    
     <div id="getQuestGlass" class="glass" hidden>
         <div id="getQuestModal" class="modal">
             <div>

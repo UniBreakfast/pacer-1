@@ -135,7 +135,7 @@ function takeNewQuest() {
     quests.push(newQuest)
     // записую масив квестів в localStorage
     localStorage.quests = JSON.stringify(quests)
-    
+
     for (let i = 0; i < newQuest.total; i++) {
         const date = new Date(newQuest.from)
         date.setDate(date.getDate() + i)
