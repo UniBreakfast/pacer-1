@@ -101,7 +101,7 @@ button {
 #activityList span:nth-child(3), #questList span:nth-child(3) {
     width: 10%;
 }
-#activityList button {
+#activityList button, #getQuestModal button {
     margin: 0 10px;
 }
 #questList details {

@@ -13,9 +13,6 @@ showTodoBtn.onclick = () => {
 //клік на кнопку ок чи фолс
 todoList.onclick = event => {
     if (event.target.tagName == 'BUTTON') {
-        // event.target.innerText == '✔️' 
-        //     ? setTodoStatus(event.target.parentElement.dataset.id, 'done') 
-        //     : setTodoStatus(event.target.parentElement.dataset.id, 'failed')
         const status = event.target.innerText == '✔️'? 'done' : 'failed'
         setTodoStatus(event.target.parentElement.dataset.id, status)
         showConfidence()

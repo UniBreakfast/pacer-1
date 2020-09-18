@@ -1,38 +1,32 @@
+// для збільшення значень ID
+let nextID = 1
+
+// показник віри в себе (кількість очок)
+let confidence = 50 
+
 // масив обєктів для зберігання видів діяльності
 const activities = [
-    {id: 1, name: 'Програмування', size: '2 години', diff: 2},
-    {id: 2, name: 'Англійська', size: '2 години', diff: 5},
-    {id: 3, name: 'Фізкультура', size: '1 година', diff: 9},
+    {id: nextID++, name: 'Програмування', size: '2 години', diff: 2},
+    {id: nextID++, name: 'Англійська', size: '2 години', diff: 5},
+    {id: nextID++, name: 'Фізкультура', size: '1 година', diff: 9},
 ]
 //масив обєктів для зберігання квестів
 const quests = [
-    {id: 4, activityID: 1, from: '2020-09-14', to: '2020-09-20',
+    {id: nextID++, activityID: 1, from: '2020-09-14', to: '2020-09-20',
     done: 2, total: 7, confidence: 14, status: 'ongoing'},
-    {id: 5, activityID: 3, from: '2020-09-12', to: '2020-09-12',
-    done: 1, total: 1, confidence: 5, status: 'done'},
-    {id: 14, activityID: 2, from: '2020-09-16', to: '2020-09-17',
-    done: 1, total: 2, confidence: 10, status: 'ongoing'},
 ]
 // плани на виконання квесту
 const todos = [
-    {id: 6, questID: 5, date: '2020-09-12', confidence: 1, status: 'done'},
-    {id: 7, questID: 4, date: '2020-09-14', confidence: 1, status: 'done'},
-    {id: 8, questID: 4, date: '2020-09-15', confidence: 1, status: 'done'},
-    {id: 9, questID: 4, date: '2020-09-16', confidence: 1, status: 'planned'},
-    {id: 10, questID: 4, date: '2020-09-17', confidence: 2, status: 'planned'},
-    {id: 11, questID: 4, date: '2020-09-18', confidence: 2, status: 'planned'},
-    {id: 12, questID: 4, date: '2020-09-19', confidence: 2, status: 'planned'},
-    {id: 13, questID: 4, date: '2020-09-20', confidence: 2, status: 'planned'},
-    {id: 15, questID: 14, date: '2020-09-16', confidence: 1, status: 'done'},
-    {id: 16, questID: 14, date: '2020-09-17', confidence: 1, status: 'planned'},
-
+    {id: nextID++, questID: 4, date: '2020-09-14', confidence: 1, status: 'done'},
+    {id: nextID++, questID: 4, date: '2020-09-15', confidence: 1, status: 'done'},
+    {id: nextID++, questID: 4, date: '2020-09-16', confidence: 1, status: 'done'},
+    {id: nextID++, questID: 4, date: '2020-09-17', confidence: 2, status: 'done'},
+    {id: nextID++, questID: 4, date: '2020-09-18', confidence: 2, status: 'planned'},
+    {id: nextID++, questID: 4, date: '2020-09-19', confidence: 2, status: 'planned'},
+    {id: nextID++, questID: 4, date: '2020-09-20', confidence: 2, status: 'planned'},
 ]
 //обєкт для перетворення статусу з інгл на укр
 const statusUKR = {done: 'завершено', ongoing: 'триває', failed: 'провалено'}
-// для збільшення значень ID
-let nextID = 7
-// показник віри в себе (кількість очок)
-let confidence = 50 
 
 showActivities()
 showQuests()
@@ -150,7 +144,7 @@ function saveNewActivity() {
     }
 }
 
-// додається новий квест і закриваємо модальне вікно
+// додається новий квест, новий план і закриваємо модальне вікно
 function takeNewQuest() {
     const newQuest = {
         id: nextID++, 
@@ -158,12 +152,24 @@ function takeNewQuest() {
         from: questFromInput.value, 
         to: questToInput.value,
         done: 0, 
-        total: questDurationInput.value, 
-        confidence: questPledgeInput.value, 
+        total: +questDurationInput.value, 
+        confidence: +questPledgeInput.value, 
         status: 'ongoing'
     }
     confidence -= newQuest.confidence
     quests.push(newQuest)
+    for (let i = 0; i < newQuest.total; i++) {
+        const date = new Date(newQuest.from)
+        date.setDate(date.getDate() + i)
+        const newTodo = {
+            id: nextID++,
+            questID: newQuest.id,
+            date: dateToISO(date),
+            confidence: Math.floor((i+1)**0.5),
+            status: 'planned',
+        }
+        todos.push(newTodo)
+    }
     getQuestGlass.hidden = true //закримаэмо модалку  
 }
 
