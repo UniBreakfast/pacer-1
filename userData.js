@@ -34,6 +34,6 @@ const activities = JSON.parse(localStorage.activities)
 //створюємо змінну в ОЗУ для квестів
 const quests = JSON.parse(localStorage.quests)
 //створюємо змінну в ОЗУ для планів
-const todos = JSON.parse(localStorage.todos)
+let todos = JSON.parse(localStorage.todos)
 
 

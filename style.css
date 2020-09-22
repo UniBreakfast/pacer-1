@@ -159,32 +159,37 @@ button {
     background-color: #044704;
     color: #9edfa3;
 }
-#todoList li {
+#reportModal {
+    width: 500px;
+    background-color: #360d02;
+    color: #c7d393;
+}
+#todoList li, #reportModal .todos li {
     width: 400px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
 }
-#todoList .failed {
+#todoList .failed, #overdueTodoList .failed {
     color: red;
 }
-#todoList .done {
+#todoList .done, #overdueTodoList .done {
     color: lime;
 }
 #todoList span:nth-child(2) {
     width: 60%;
 }
-#todoList div {
+#todoList div, #overdueTodoList div {
     position: absolute;
     width: 90%;
     height: 3px;
     right: 0;
 }
-#todoList .failed div {
+#todoList .failed div, #overdueTodoList .failed div {
     background-color: red;
 }
-#todoList .done div {
+#todoList .done div, #overdueTodoList .done div {
     background-color: lime;
 }
 

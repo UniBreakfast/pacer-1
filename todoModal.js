@@ -35,7 +35,7 @@ function buildTodoItem(todo) {
             ${todo.status == 'done' ? '<span>✔️</span>' 
             : (todo.status == 'failed' ? '<span>❌</span>' 
             : '<button>✔️</button><button>❌</button>')}
-            ${todo.status == 'planed' ? '' : '<div></div>'}
+            ${todo.status == 'planned' ? '' : '<div></div>'}
             <span>${activity.name}</span>
             <span>${activity.size}</span>
             <span>+${todo.confidence}</span>
@@ -61,8 +61,9 @@ function setTodoStatus(todoID, status) {
         }
     } else {
         quest.status = 'failed'
-        todos.filter(todo => todo.questID == quest.id && todo.status == 'planned')
-            .forEach(todo => todo.status = 'canceled')
+        const canceledTodos = todos.filter(todo => todo.questID == quest.id && todo.status == 'planned')
+        canceledTodos.forEach(todo => todo.status = 'failed')
+        todos = todos.filter(todo => !canceledTodos.includes(todo))
     }
     // зберігаю зміни в планах та квестах заново в localStorage
     localStorage.todos = JSON.stringify(todos)

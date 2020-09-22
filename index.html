@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="userData.js"></script>
     <script src="todoModal.js" defer></script>
+    <script src="reportModal.js" defer></script>
     <script src="getQuestModal.js" defer></script>
     <script src="script.js" defer></script>
 
@@ -48,9 +49,10 @@
         </div>
     </div>
 
-    <div id="reportGlass" class="glass">
+    <div id="reportGlass" class="glass" hidden>
         <div id="reportModal" class="modal">
-            <ul></ul>
+            <ul id="overdueTodoList" class="dates"></ul>
+            <div><button class="close">Ok</button></div>
         </div>
     </div>
     
