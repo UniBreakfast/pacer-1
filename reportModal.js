@@ -11,7 +11,7 @@ reportBtn.onclick = () => {
         overdueTodoList.innerHTML = '<center>Відмінно! Прострочених звітів немає</center>'
     }
     showReportModal()
-
+// клік по елементах списку прострочених планів
     overdueTodoList.onclick = event => {
         if (event.target.tagName == 'BUTTON') {
             const status = event.target.innerText == '✔️'? 'done' : 'failed'

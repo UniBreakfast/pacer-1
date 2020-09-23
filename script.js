@@ -44,7 +44,7 @@ function buildActivityItem(activity) {
                     </button>`}
 
                     <button>Редагувати</button>
-                    <button>🗑️</button>
+                    <button>В архів</button>
                 </div>
             </details>            
         </li>
