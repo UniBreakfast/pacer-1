@@ -7,7 +7,8 @@ if (!localStorage.nextID ||
     !localStorage.confidence ||
     !localStorage.activities ||
     !localStorage.quests ||
-    !localStorage.todos) {
+    !localStorage.todos ||
+    !localStorage.archive) {
         localStorage.nextID = '12'
         localStorage.confidence = '50'
         localStorage.activities = JSON.stringify([
@@ -28,8 +29,9 @@ if (!localStorage.nextID ||
             {id: 10, questID: 4, date: '2020-09-19', confidence: 2, status: 'planned'},
             {id: 11, questID: 4, date: '2020-09-20', confidence: 2, status: 'planned'},
         ])
-        localStorage.archive = []
+        localStorage.archive = '[]'
     }
+
 //створюємо змінну в ОЗУ для діяльностей 
 const activities = JSON.parse(localStorage.activities)
 //створюємо змінну в ОЗУ для квестів

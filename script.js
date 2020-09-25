@@ -24,6 +24,7 @@ takeQuestBtn.onclick = () => {
     showConfidence()
     showActivities()
 }
+activityList 
 
 //////////////////////////////////////////////////////////////////////////////
 // побудова елементу списку діяльностей
@@ -44,7 +45,7 @@ function buildActivityItem(activity) {
                     </button>`}
 
                     <button>Деталі</button>
-                    <button>В архів</button>
+                    <button data-id="${activity.id}">В архів</button>
                 </div>
             </details>            
         </li>
@@ -70,7 +71,7 @@ function buildQuestItem(quest) {
                 <div>
                     <button>Провалити</button>
                     <button>Деталі</button>
-                    <button>В архів</button>
+                    <button data-id="${quest.id}">В архів</button>
                 </div>
             </details>            
         </li>
@@ -84,12 +85,19 @@ function showActivities() {
         element.ontoggle = closeOtherDetails
     });
     activityList.querySelectorAll('button').forEach(btn => {
-        if (btn.innerText.trim() == 'Взяти квест') {
+        const label = btn.innerText.trim()
+        if (label == 'Взяти квест') {
             btn.onclick = () => {
                 if (confidence() >= +btn.dataset.diff) showGetQuestModal(btn.dataset.id)
                 else showAlert('Недостатньо віри в себе на цей квест')
             }
+        } else if (label == 'В архів') {
+            btn.onclick = () => {
+                moveToArchive(btn.dataset.id)
+                showActivities()
+            }
         }
+
     })
 }
 // вивід списку квестів
@@ -219,4 +227,41 @@ function confidence(value) {
     if (value === undefined) return confidence
     confidence += value
     localStorage.confidence = confidence
+}
+// функція для переміщення квестів та діяльностей в архів
+function moveToArchive(id) {
+    const activityIndex = activities.findIndex(activity => id == activity.id)
+    const activity = activities[activityIndex]
+    if (activity) {
+        archive.push(activity)
+        activities.splice(activityIndex, 1)
+        localStorage.activities = JSON.stringify(activities)
+    } else {
+        const questIndex = quests.findIndex(quest => id == quest.id)
+        const quest = quests[questIndex]
+        if (quest) {
+            archive.push(quest)
+            quests.splice(questIndex, 1)
+            localStorage.quests = JSON.stringify(quests)
+        }
+    }
+    localStorage.archive = JSON.stringify(archive)
+
+
+    // знайти обєкт з відповдіним айді в масиві діяльностей
+    // знайшов
+        // додаю його в масив-архів
+        // записую в локалсторедж архів як джейсон
+        // видаляю діяльність з масиву діяльностей 
+        // перезаписую в локалсторедж масив актівітіс як джейсон
+    // не знайшов
+        // знайти обєкт з відповідним айді у масиві квестів
+        // знайшов
+            // додаю обєкт квесту у масив-архів
+            // записую в локалсторедж як джейсон
+            // видаляю квест з масиву квестів
+            // записую в локалсторедж як джейсон
+        // не знайшов
+            
+
 }
