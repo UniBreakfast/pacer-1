@@ -66,6 +66,9 @@ button {
 #activityView details button {
     color: #fcd582;
 }
+#reportModal button {
+    color: #fcaa3f;
+}
 
 .brick-list {
     margin: auto;
@@ -159,12 +162,14 @@ button {
     background-color: #044704;
     color: #9edfa3;
 }
+
 #reportModal {
     width: 500px;
     background-color: #360d02;
-    color: #c7d393;
+    color: #ff8800;
 }
 #todoList li, #reportModal .todos li {
+    
     width: 400px;
     display: flex;
     justify-content: space-between;
@@ -194,7 +199,7 @@ button {
 }
 
 
-#getQuestModal button, #questList button {
+#getQuestModal button, #questList button, #todoModal button {
     color: #8fe296;
 }
 #alertModal {
@@ -207,8 +212,10 @@ button {
     position: absolute;
     top: 10px;
     right: 70px;
+    color: #faf9f9;
 }
 #dateTimeView h3 {
+    color: #faf9f9;
     margin: 2px;
     text-align: center;
 }
@@ -221,6 +228,7 @@ button {
     align-items: flex-end;
 }
 #toolbar button {
+    color: #faf9f9;
     margin: 3px;
     min-width: 70px;
 }
