@@ -8,6 +8,9 @@ todoGlass.onclick = event => {
 // клік
 showTodoBtn.onclick = () => {
     showTodoToday()
+    if (!todoList.children.length) {
+        todoList.innerHTML = '<center>Планів на сьогодні немає. Варто взяти квест</center>'
+    }
     showTodoModal()
 }
 //клік на кнопку ок чи фолс
@@ -48,7 +51,7 @@ function showTodoToday() {
         .map(buildTodoItem).join('')
 } 
 // функція для зміни статусу плану і кількості очок
-function setTodoStatus(todoID, status) {
+function setTodoStatus(todoID, status, groupedOverdueTodos, overdueTodos) {
     const todo = todos.find(todo => todo.id == todoID)
     todo.status = status
     const quest = quests.find(quest => quest.id == todo.questID)
@@ -58,6 +61,20 @@ function setTodoStatus(todoID, status) {
         if (quest.done == quest.total) {
             quest.status = 'done'
             confidence(quest.confidence)
+        }
+        if (quest.status == 'done') {
+            const date = new Date(todo.date)
+            date.setDate(date.getDate() + 1)
+            const newTodo = {...todo, id: newID(), date: dateToISO(date), status: 'planned'}
+            todos.push(newTodo)
+            if (newTodo.date < dateToISO(new Date) && overdueTodos) {
+                overdueTodos.push(newTodo)
+                overdueTodos.sort((a, b) => {
+                    if (a.date < b.date) return -1
+                })
+                groupedOverdueTodos[newTodo.date] = 
+                    [...groupedOverdueTodos[newTodo.date] || [], newTodo]
+            } 
         }
     } else {
         quest.status = 'failed'

@@ -6,18 +6,22 @@ reportGlass.onclick = event => {
 // клік на кнопку Звіти
 reportBtn.onclick = () => {
     const [groupedOverdueTodos, overdueTodos] = selectOverdueTodos()
+    globalThis.groupedOverdueTodos = groupedOverdueTodos
+
     showOverdueTodos(groupedOverdueTodos, overdueTodos)
     if (!overdueTodos.length) {
         overdueTodoList.innerHTML = '<center>Відмінно! Прострочених звітів немає</center>'
     }
     showReportModal()
-// клік по елементах списку прострочених планів
+    // клік по елементах списку прострочених планів
     overdueTodoList.onclick = event => {
         if (event.target.tagName == 'BUTTON') {
             const status = event.target.innerText == '✔️'? 'done' : 'failed'
-            setTodoStatus(event.target.parentElement.dataset.id, status)
+            setTodoStatus(event.target.parentElement.dataset.id, status,
+                            groupedOverdueTodos, overdueTodos)
             showConfidence()
             showTodoToday()
+            
             showOverdueTodos(groupedOverdueTodos, overdueTodos)
             showQuests()
             showActivities()

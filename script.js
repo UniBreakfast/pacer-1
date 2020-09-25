@@ -43,7 +43,7 @@ function buildActivityItem(activity) {
                         Взяти квест
                     </button>`}
 
-                    <button>Редагувати</button>
+                    <button>Деталі</button>
                     <button>В архів</button>
                 </div>
             </details>            
@@ -68,8 +68,8 @@ function buildQuestItem(quest) {
                     <span title="статус квесту">${statusUKR[quest.status]}</span>
                 </summary>
                 <div>
-                    <button>Деталі</button>
                     <button>Провалити</button>
+                    <button>Деталі</button>
                     <button>В архів</button>
                 </div>
             </details>            

@@ -17,7 +17,7 @@ if (!localStorage.nextID ||
         ])
         localStorage.quests = JSON.stringify([
             {id: 4, activityID: 1, from: '2020-09-14', to: '2020-09-20',
-            done: 2, total: 7, confidence: 14, status: 'ongoing'},
+            done: 4, total: 7, confidence: 14, status: 'ongoing'},
         ])
         localStorage.todos = JSON.stringify([
             {id: 5, questID: 4, date: '2020-09-14', confidence: 1, status: 'done'},
