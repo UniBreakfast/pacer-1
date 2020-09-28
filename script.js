@@ -80,7 +80,8 @@ function buildQuestItem(quest) {
 
 // вивід списку діяльностей
 function showActivities() {
-    activityList.innerHTML = activities.map(buildActivityItem).join('')
+    activityList.innerHTML = activities.filter(activity => !activity.archived)
+        .map(buildActivityItem).join('')
     activityList.querySelectorAll('details').forEach(element => {
         element.ontoggle = closeOtherDetails
     });
@@ -102,7 +103,8 @@ function showActivities() {
 }
 // вивід списку квестів
 function showQuests() {
-    questList.innerHTML = quests.map(buildQuestItem).join('')
+    questList.innerHTML = quests.filter(quest => !quest.archived)
+        .map(buildQuestItem).join('')
     questList.querySelectorAll('details').forEach(element => {
         element.ontoggle = closeOtherDetails
     });
@@ -230,38 +232,16 @@ function confidence(value) {
 }
 // функція для переміщення квестів та діяльностей в архів
 function moveToArchive(id) {
-    const activityIndex = activities.findIndex(activity => id == activity.id)
-    const activity = activities[activityIndex]
+    const activity = activities.find(activity => id == activity.id)
     if (activity) {
-        archive.push(activity)
-        activities.splice(activityIndex, 1)
+        activity.archived = true
         localStorage.activities = JSON.stringify(activities)
     } else {
-        const questIndex = quests.findIndex(quest => id == quest.id)
-        const quest = quests[questIndex]
+        const quest = quests.find(quest => id == quest.id)
         if (quest) {
-            archive.push(quest)
-            quests.splice(questIndex, 1)
+            quest.archived = true
             localStorage.quests = JSON.stringify(quests)
         }
     }
-    localStorage.archive = JSON.stringify(archive)
-
-
-    // знайти обєкт з відповдіним айді в масиві діяльностей
-    // знайшов
-        // додаю його в масив-архів
-        // записую в локалсторедж архів як джейсон
-        // видаляю діяльність з масиву діяльностей 
-        // перезаписую в локалсторедж масив актівітіс як джейсон
-    // не знайшов
-        // знайти обєкт з відповідним айді у масиві квестів
-        // знайшов
-            // додаю обєкт квесту у масив-архів
-            // записую в локалсторедж як джейсон
-            // видаляю квест з масиву квестів
-            // записую в локалсторедж як джейсон
-        // не знайшов
-            
-
+ 
 }
