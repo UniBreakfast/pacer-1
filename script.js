@@ -243,5 +243,4 @@ function moveToArchive(id) {
             localStorage.quests = JSON.stringify(quests)
         }
     }
- 
 }
