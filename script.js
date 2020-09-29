@@ -24,7 +24,7 @@ takeQuestBtn.onclick = () => {
     showConfidence()
     showActivities()
 }
-activityList 
+ 
 
 //////////////////////////////////////////////////////////////////////////////
 // побудова елементу списку діяльностей
@@ -108,6 +108,15 @@ function showQuests() {
     questList.querySelectorAll('details').forEach(element => {
         element.ontoggle = closeOtherDetails
     });
+    questList.querySelectorAll('button').forEach(btn => {
+        const label = btn.innerText.trim()
+        if (label == 'В архів') {
+            btn.onclick = () => {
+                moveToArchive(btn.dataset.id)
+                showQuests()
+            }
+        }
+    })
 }
 //функція для збереження діяльностей з інпутів
 function saveNewActivity() {

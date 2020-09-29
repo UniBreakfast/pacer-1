@@ -12,6 +12,7 @@
     <script src="getQuestModal.js" defer></script>
     <script src="script.js" defer></script>
     <script src="resetBtn.js" defer></script>
+    <script src="archiveModal.js" defer></script>
 
 </head>
 
@@ -41,6 +42,7 @@
     <div id="toolbar">
         <button id="showTodoBtn">План на сьогодні</button>
         <button id="reportBtn">Звіти</button>
+        <button id="archiveBtn">Архів</button>
     </div>
 
     <div id="todoGlass" class="glass" hidden>
@@ -87,7 +89,16 @@
         </div>
     </div>
 
-
+    <div id="archiveGlass" class="glass" hidden>
+        <div id="archiveModal" class="modal">
+            <div class="tabs">
+                <button>Діяльності</button>
+                <button>Квести</button>
+            </div>
+            <ul id="archiveList" class="brick-list"></ul>
+            <div><button class="close">Ok</button></div>
+        </div>
+    </div>
 
 
 
