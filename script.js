@@ -17,7 +17,7 @@ alertGlass.onclick = event => {
         alertGlass.hidden = true
     }
 }
-
+//клік на кнопці взяти квест
 takeQuestBtn.onclick = () => {
     takeNewQuest()
     showQuests()

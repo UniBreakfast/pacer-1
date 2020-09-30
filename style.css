@@ -32,6 +32,7 @@ button {
     border: 1px solid;
     border-radius: 10px;
 }
+
 button:active {
     transform: translateY(2px);
 }
@@ -80,7 +81,7 @@ button:active {
 .brick-list details, #activityView details, #archiveList details {
     display: flex;
     width: 400px;
-    border: 1px solid black;
+    border: 1px solid;
     border-radius: 10px;
     padding: 5px 10px;
     margin: 5px;
@@ -93,7 +94,7 @@ button:active {
 .brick-list summary::-webkit-details-marker {
     display:none;
 }
-#activityList details, #activityView details, #archiveList details {
+#activityList details, #activityView details, #archiveModal.activities {
     background-color: #423603;
     color: #f0c76f;
 }
@@ -160,7 +161,7 @@ button:active {
 
 }
 
-#todoModal, #getQuestModal, #archiveModal {
+#todoModal, #getQuestModal, #archiveModal.quests {
     width: 500px;
     background-color: #044704;
     color: #9edfa3;
@@ -170,6 +171,22 @@ button:active {
     width: 500px;
     background-color: #360d02;
     color: #ff8800;
+}
+#archiveModal {
+    width: 500px;
+    background-color: #474747;
+    color: #eeeeee;
+}
+#archiveModal button {
+    color: inherit;
+}
+#archiveModal>.tabs>:first-child {
+    background-color: #423603;
+    color: #fcd582;
+}
+.tabs>:last-child {
+    background-color: #044704;
+    color: #8FE296 !important;
 }
 #todoList li, #reportModal .todos li {
     
@@ -202,7 +219,7 @@ button:active {
 }
 
 
-#getQuestModal button, #questList button, #todoModal button, #archiveModal button {
+#getQuestModal button, #questList button, #todoModal button {
     color: #8fe296;
 }
 #alertModal {
