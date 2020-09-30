@@ -71,7 +71,8 @@ function buildQuestItem(quest) {
                 <div>
                     <button>Провалити</button>
                     <button>Деталі</button>
-                    <button data-id="${quest.id}">В архів</button>
+                    ${quest.status == 'ongoing'? '':
+                        `<button data-id="${quest.id}">В архів</button>`}
                 </div>
             </details>            
         </li>
