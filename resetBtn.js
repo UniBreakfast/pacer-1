@@ -9,10 +9,8 @@ document.body.append(resetBar)
 // resetBtn.style.bottom = '20px'
 // resetBtn.style.right = '20px'
 
-Object.assign(resetBtn.style, {
-    color: '#faf9f9',
+Object.assign(resetBar.style, {
     margin: '3px',
-    minWidth: '70px',
     position: 'absolute',
     bottom: '20px',
     right: '20px',

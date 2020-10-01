@@ -27,13 +27,19 @@ ul {
 button, summary {
     cursor: pointer;
 }
-button {
+button, .button {
+    font: 16px Trebuchet MS;
+    text-align: center;
+    display: inline-block;
+    color: #faf9f9;
     background: none;
     border: 1px solid;
     border-radius: 10px;
+    min-width: 70px;
+    padding: 4px 8px;
 }
 
-button:active {
+button:active, .button:active {
     transform: translateY(2px);
 }
 
@@ -248,10 +254,10 @@ button:active {
     align-items: flex-end;
 }
 #toolbar button {
-    color: #faf9f9;
     margin: 3px;
     min-width: 70px;
 }
+
 [hidden] {
     display: none !important;
 }
