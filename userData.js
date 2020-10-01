@@ -17,7 +17,7 @@ if (!localStorage.nextID ||
         ])
         localStorage.quests = JSON.stringify([
             {id: 4, activityID: 1, from: '2020-09-14', to: '2020-09-20',
-            done: 4, total: 7, confidence: 14, status: 'ongoing'},
+            progress: 4, total: 7, confidence: 14, status: 'ongoing'},
         ])
         localStorage.todos = JSON.stringify([
             {id: 5, questID: 4, date: '2020-09-14', confidence: 1, status: 'done'},
@@ -36,6 +36,3 @@ const activities = JSON.parse(localStorage.activities)
 const quests = JSON.parse(localStorage.quests)
 //створюємо змінну в ОЗУ для планів
 let todos = JSON.parse(localStorage.todos)
-
-
-

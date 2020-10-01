@@ -51,38 +51,64 @@ function showTodoToday() {
         .map(buildTodoItem).join('')
 } 
 // функція для зміни статусу плану і кількості очок
-function setTodoStatus(todoID, status, groupedOverdueTodos, overdueTodos) {
+function setTodoStatus(todoID, status) {
     const todo = todos.find(todo => todo.id == todoID)
     todo.status = status
     const quest = quests.find(quest => quest.id == todo.questID)
     if (status == 'done') {
-        quest.done++
+        quest.progress++
         confidence(todo.confidence)
-        if (quest.done == quest.total) {
-            quest.status = 'done'
-            confidence(quest.confidence)
-        }
-        if (quest.status == 'done') {
-            const date = new Date(todo.date)
-            date.setDate(date.getDate() + 1)
-            const newTodo = {...todo, id: newID(), date: dateToISO(date), status: 'planned'}
-            todos.push(newTodo)
-            if (newTodo.date < dateToISO(new Date) && overdueTodos) {
-                overdueTodos.push(newTodo)
-                overdueTodos.sort((a, b) => {
-                    if (a.date < b.date) return -1
-                })
-                groupedOverdueTodos[newTodo.date] = 
-                    [...groupedOverdueTodos[newTodo.date] || [], newTodo]
-            } 
-        }
+        updateQuestStatus(quest)
+        populateQuestTodos(quest)    
     } else {
-        quest.status = 'failed'
         const canceledTodos = todos.filter(todo => todo.questID == quest.id && todo.status == 'planned')
         canceledTodos.forEach(todo => todo.status = 'failed')
         todos = todos.filter(todo => !canceledTodos.includes(todo))
+        updateQuestStatus(quest)
     }
-    // зберігаю зміни в планах та квестах заново в localStorage
     localStorage.todos = JSON.stringify(todos)
     localStorage.quests = JSON.stringify(quests)
+}
+//функція для зміни статусу квесту в залежності від плану
+function updateQuestStatus(quest /* or quest.id */) {
+    //якщо передали не обэкт квесту то тоді це його айді
+    if (typeof quest != 'object') quest = quests.find(q => q.id == quest)
+    if (quest.status != 'ongoing' ) return quest.status
+    if (quest.progress >= quest.total) {
+        confidence(quest.confidence)
+        return quest.status = 'done'
+    }
+    if (todos.some(todo => todo.questID == quest.id && todo.status == 'failed')) return quest.status = 'failed'
+}
+//функція для створення нових todo для quest
+function populateQuestTodos(quest) {
+    const questTodos = todos.filter(todo => todo.questID == quest.id)
+    if (!quest.progress && !questTodos.length) {
+        for (let i = 0; i < newQuest.total; i++) {
+            const date = new Date(newQuest.from)
+            date.setDate(date.getDate() + i)
+            const newTodo = {
+                id: newID(),
+                questID: newQuest.id,
+                date: dateToISO(date),
+                confidence: Math.floor((i+1)**0.5),
+                status: 'planned',
+            }
+            todos.push(newTodo)
+        }
+        localStorage.todos = JSON.stringify(todos)
+    } else if (quest.status == 'done' && questTodos.every(todo => todo.status == 'done')) {
+        const lastTodo = questTodos[questTodos.length - 1]
+        const date = new Date(lastTodo.date)
+        date.setDate(date.getDate() + 1)
+        const newTodo = {...lastTodo, id: newID(), date: dateToISO(date), status: 'planned'}
+        todos.push(newTodo)
+        if (newTodo.date < dateToISO(new Date)) {
+            overdueTodos.push(newTodo)
+            overdueTodos.sort((a, b) => a.date < b.date ? -1 : 1)
+            groupedOverdueTodos[newTodo.date] = 
+                [...groupedOverdueTodos[newTodo.date] || [], newTodo]
+        }
+        localStorage.todos = JSON.stringify(todos)
+    }
 }

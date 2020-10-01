@@ -64,7 +64,7 @@ function buildQuestItem(quest) {
                     <span title="суб'єктивна складність">${activity.diff}</span>
                     <span title="дата початку">з ${isoToGOST(quest.from)}</span>
                     <span title="можлива дата завершення">по ${isoToGOST(quest.to)}</span>
-                    <span><span title="кількість днів виконання позаду">${quest.done}/</span><span title="передбачена тривалість квесту">${quest.total} днів</span></span>
+                    <span><span title="кількість днів виконання позаду">${quest.progress}/</span><span title="передбачена тривалість квесту">${quest.total} днів</span></span>
                     <span title="завдаток/винагорода по завершенню">${quest.confidence}</span>
                     <span title="статус квесту">${statusUKR[quest.status]}</span>
                 </summary>
@@ -146,7 +146,7 @@ function takeNewQuest() {
         activityID: takeQuestBtn.dataset.id, 
         from: questFromInput.value, 
         to: questToInput.value,
-        done: 0, 
+        progress: 0, 
         total: +questDurationInput.value, 
         confidence: +questPledgeInput.value, 
         status: 'ongoing'

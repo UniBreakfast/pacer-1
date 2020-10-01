@@ -1,3 +1,5 @@
+let overdueTodos = []
+let groupedOverdueTodos = {}
 // закриваємо модальне вікно звітів
 reportGlass.onclick = event => {
     if (event.target == reportGlass || event.target.classList.contains('close')) 
@@ -5,10 +7,8 @@ reportGlass.onclick = event => {
 }
 // клік на кнопку Звіти
 reportBtn.onclick = () => {
-    const [groupedOverdueTodos, overdueTodos] = selectOverdueTodos()
-    globalThis.groupedOverdueTodos = groupedOverdueTodos
-
-    showOverdueTodos(groupedOverdueTodos, overdueTodos)
+    selectOverdueTodos()
+    showOverdueTodos()
     if (!overdueTodos.length) {
         overdueTodoList.innerHTML = '<center>Відмінно! Прострочених звітів немає</center>'
     }
@@ -17,12 +17,10 @@ reportBtn.onclick = () => {
     overdueTodoList.onclick = event => {
         if (event.target.tagName == 'BUTTON') {
             const status = event.target.innerText == '✔️'? 'done' : 'failed'
-            setTodoStatus(event.target.parentElement.dataset.id, status,
-                            groupedOverdueTodos, overdueTodos)
+            setTodoStatus(event.target.parentElement.dataset.id, status)
             showConfidence()
             showTodoToday()
-            
-            showOverdueTodos(groupedOverdueTodos, overdueTodos)
+            showOverdueTodos()
             showQuests()
             showActivities()
         }
@@ -36,20 +34,19 @@ function showReportModal() {
 // функція для вибірки планів, у яких статус за попередні дні залишився 'planned'
 function selectOverdueTodos() {
     const today = dateToISO(new Date)
-    const overdueTodos = todos.filter(todo => todo.status == 'planned' && todo.date < today)
+    overdueTodos = todos.filter(todo => todo.status == 'planned' && todo.date < today)
     overdueTodos.sort((a, b) => {
         if (a.date < b.date) return -1
         //if (a.date > b.date) return 1 для експерименту!!!
     })
-    const grouped = {}
+    groupedOverdueTodos = {}
     const dates = [...new Set(overdueTodos.map(todo => todo.date))]
     for (const date of dates) {
-        grouped[date] = overdueTodos.filter(todo => todo.date == date)
+        groupedOverdueTodos[date] = overdueTodos.filter(todo => todo.date == date)
     }
-    return [grouped, overdueTodos]
 }
 // функція для побудови розмітки хтмл зі списком прострочених планів
-function buildOverdueTodoItem(todo, overdueTodos) {
+function buildOverdueTodoItem(todo) {
     const quest = quests.find(quest => quest.id == todo.questID)    
     const activity = activities.find(activity => activity.id == quest.activityID)
     const first = overdueTodos.find(otherTodo => otherTodo.questID == todo.questID &&
@@ -67,14 +64,12 @@ function buildOverdueTodoItem(todo, overdueTodos) {
     `
 }
 // функція для виводу прострочених планів 
-function showOverdueTodos(groupedOverdueTodos, overdueTodos) {
+function showOverdueTodos() {
     const overdueTodoList = document.getElementById('overdueTodoList')
     let html = ''
     for (const date in groupedOverdueTodos) {
         if (!groupedOverdueTodos.hasOwnProperty(date)) continue
- 
         const todos = groupedOverdueTodos[date]
-        
         html += `
             <li>
                 <h3>${isoToGOST(date)}</h3>
