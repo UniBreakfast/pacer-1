@@ -31,8 +31,8 @@ if (!localStorage.nextID ||
     }
 
 //створюємо змінну в ОЗУ для діяльностей 
-const activities = JSON.parse(localStorage.activities)
+let activities = JSON.parse(localStorage.activities)
 //створюємо змінну в ОЗУ для квестів
-const quests = JSON.parse(localStorage.quests)
+let quests = JSON.parse(localStorage.quests)
 //створюємо змінну в ОЗУ для планів
 let todos = JSON.parse(localStorage.todos)
