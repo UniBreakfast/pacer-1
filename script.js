@@ -93,13 +93,17 @@ function showActivities() {
                 if (confidence() >= +btn.dataset.diff) showGetQuestModal(btn.dataset.id)
                 else showAlert('Недостатньо віри в себе на цей квест')
             }
+        } else if (label == 'Деталі') {
+            btn.onclick = () => {
+                showActivityInfoModal(btn.dataset.id)
+            }
         } else if (label == 'В архів') {
             btn.onclick = () => {
                 moveToArchive(btn.dataset.id)
                 showActivities()
             }
         }
-
+        
     })
 }
 // вивід списку квестів
