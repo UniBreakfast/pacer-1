@@ -38,14 +38,13 @@ function buildActivityItem(activity) {
                     <span title="міра виконання">${activity.size}</span>
                     <span title="суб'єктивна складність">${activity.diff}</span>
                 </summary>
-                <div>
+                <div data-id="${activity.id}">
                 ${ongoing ? '' :`
-                    <button data-id="${activity.id}" data-diff="${activity.diff}">
+                    <button data-diff="${activity.diff}">
                         Взяти квест
                     </button>`}
-
                     <button>Деталі</button>
-                    <button data-id="${activity.id}">В архів</button>
+                    <button>В архів</button>
                 </div>
             </details>            
         </li>
@@ -90,16 +89,16 @@ function showActivities() {
         const label = btn.innerText.trim()
         if (label == 'Взяти квест') {
             btn.onclick = () => {
-                if (confidence() >= +btn.dataset.diff) showGetQuestModal(btn.dataset.id)
+                if (confidence() >= +btn.dataset.diff) showGetQuestModal(btn.parentElement.dataset.id)
                 else showAlert('Недостатньо віри в себе на цей квест')
             }
         } else if (label == 'Деталі') {
             btn.onclick = () => {
-                showActivityInfoModal(btn.dataset.id)
+                showActivityInfoModal(btn.parentElement.dataset.id)
             }
         } else if (label == 'В архів') {
             btn.onclick = () => {
-                moveToArchive(btn.dataset.id)
+                moveToArchive(btn.parentElement.dataset.id)
                 showActivities()
             }
         }
@@ -125,12 +124,13 @@ function showQuests() {
 }
 //функція для збереження діяльностей з інпутів
 function saveNewActivity() {
+    const diff = Math.min(Math.max(1, +diffInput.value), 10)
     if (nameInput.value && sizeInput.value && diffInput.value) {
         const newActivity = {
             id: newID(),
             name: nameInput.value, 
             size: sizeInput.value, 
-            diff: diffInput.value
+            //diff: diff,
         }
         activities.push(newActivity)
         // записую масив діяльностей в localStorage

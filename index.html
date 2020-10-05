@@ -26,7 +26,8 @@
             <div>
                 <input id="nameInput" type="text" placeholder="Діяльність">
                 <input id="sizeInput" type="text" placeholder="Міра">
-                <input id="diffInput" type="number" placeholder="Складність">
+                <input id="diffInput" type="number" placeholder="Складність"
+                    min="1" max="10">
                 <button id="saveNewActivityBtn">💾</button>
             </div>
         </details>
@@ -107,34 +108,10 @@
             <div><label>Діяльність<input type="text"></label></div>
             <div>
                 <label>Міра виконання<input type="text"></label>
-                <label>Складність<input type="number"></label>
+                <label>Складність<input type="number" min="1" max="10"></label>
             </div>
             <div>Квести</div>
-            <ul id="" class="brick-list">
-                <li>
-                    <details>
-                        <summary>
-                            <span title="дата початку">з 14.09.2020</span>
-                            <span title="можлива дата завершення">по 20.09.2020</span>
-                            <span><span title="кількість днів виконання позаду">4/</span><span title="передбачена тривалість квесту">7 днів</span></span>
-                            <span title="завдаток/винагорода по завершенню">14</span>
-                            <span title="статус квесту">завершено</span>
-                        </summary>
-                    </details>            
-                </li>
-            
-                <li>
-                    <details>
-                        <summary>
-                            <span title="дата початку">з 05.10.2020</span>
-                            <span title="можлива дата завершення">по 09.10.2020</span>
-                            <span><span title="кількість днів виконання позаду">0/</span><span title="передбачена тривалість квесту">5 днів</span></span>
-                            <span title="завдаток/винагорода по завершенню">25</span>
-                            <span title="статус квесту">триває</span>
-                        </summary>
-                    </details>            
-                </li>
-            </ul>
+            <ul class="brick-list"></ul>
             
             <div><button class="close">Ok</button></div>
         </div>
