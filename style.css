@@ -164,7 +164,7 @@ button:active, .button:active {
     padding: 10px 20px;
     line-height: 2;
 }
-.modal>div, details>div {
+.modal>div, details>div, #alertModal, #promptModal {
     text-align: center;
 }
 .modal>div:last-child {
@@ -180,7 +180,7 @@ button:active, .button:active {
     background-color: #360d02;
     color: #ff8800;
 }
-#archiveModal {
+#archiveModal, #promptModal {
     width: 500px;
     background-color: #474747;
     color: #eeeeee;
@@ -233,7 +233,7 @@ button:active, .button:active {
 #alertModal {
     width: 300px;
     background-color: #a75f5f;
-    color: #2b0909;
+    color: #eeeeee;
     line-height: unset;
 }
 #activityInfoModal {

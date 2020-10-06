@@ -29,7 +29,21 @@ if (!localStorage.nextID ||
             {id: 11, questID: 4, date: '2020-09-20', confidence: 2, status: 'planned'},
         ])
     }
-
+    // початкове визначення віри в себе
+if (!localStorage.etap) {
+    showPrompt('Оцініть віру в себе за десятибальною шкалою: ', 'number', (answer) => {
+        if (+answer < 2) {
+            showAlert('Вибачте, ми не можемо взяти на себе відповідальність. З такою низькою вірою в себе зверністься до психолога')
+            return false
+        }
+        if (+answer > 10) answer = 10
+              
+        localStorage.confidence = answer
+        localStorage.etap = answer
+        showConfidence()
+        return true
+    })
+}
 //створюємо змінну в ОЗУ для діяльностей 
 let activities = JSON.parse(localStorage.activities)
 //створюємо змінну в ОЗУ для квестів

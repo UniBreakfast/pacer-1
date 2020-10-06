@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <script src="userData.js"></script>
+    <script src="commonFuncs.js"></script>
+    <script src="userData.js" defer></script>
     <script src="todoModal.js" defer></script>
     <script src="reportModal.js" defer></script>
     <script src="getQuestModal.js" defer></script>
@@ -108,6 +109,16 @@
             <div>
                 <button class="close">Close</button>
                 <button class="save">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="promptGlass" class="glass" hidden>
+        <div id="promptModal" class="modal">
+            <span id="promptMsg"></span>
+            <div>
+                <input id="promptInp">
+                <button>ok</button>
             </div>
         </div>
     </div>

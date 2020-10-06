@@ -23,6 +23,7 @@ function resetLS() {
     delete localStorage.activities
     delete localStorage.quests
     delete localStorage.todos
+    delete localStorage.etap
     location.reload() // F5
     // ['nextID', 'confidence', 'activities', 'quests', 'todos']
     //     .forEach(key => delete localStorage[key])
