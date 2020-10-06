@@ -130,7 +130,7 @@ function saveNewActivity() {
             id: newID(),
             name: nameInput.value, 
             size: sizeInput.value, 
-            //diff: diff,
+            diff,
         }
         activities.push(newActivity)
         // записую масив діяльностей в localStorage

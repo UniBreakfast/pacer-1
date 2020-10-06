@@ -3,6 +3,7 @@ activityInfoGlass.onclick = event => {
     activityInfoGlass.hidden = true
 }
 
+
 // функція для підготовки модального вікна при натисканні кнопки Деталі 
 function prepActivityInfoModal(activity) {
     const inputs = activityInfoModal.querySelectorAll('input')
@@ -27,7 +28,8 @@ function buildActivityQuest(quest) {
                 <summary>
                     <span title="дата початку">з ${isoToGOST(quest.from)}</span>
                     <span title="можлива дата завершення">по ${isoToGOST(quest.to)}</span>
-                    <span><span title="кількість днів виконання позаду">${quest.progress}/</span><span title="передбачена тривалість квесту">${quest.total} днів</span></span>
+                    <span><span title="кількість днів виконання позаду">${quest.progress}/</span>
+                    <span title="передбачена тривалість квесту">${quest.total} днів</span></span>
                     <span title="завдаток/винагорода по завершенню">${quest.confidence}</span>
                     <span title="статус квесту">${statusUKR[quest.status]}</span>
                 </summary>
