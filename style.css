@@ -146,7 +146,6 @@ button:active, .button:active {
     justify-content: center;
     font-size: 28px;
 }
-
 .glass {
     position: absolute;
     top: 0;
@@ -167,15 +166,15 @@ button:active, .button:active {
 }
 .modal>div, details>div {
     text-align: center;
-
 }
-
+.modal>div:last-child {
+    margin: 10px;
+}
 #todoModal, #getQuestModal, #archiveModal.quests {
     width: 500px;
     background-color: #044704;
     color: #9edfa3;
 }
-
 #reportModal {
     width: 500px;
     background-color: #360d02;
