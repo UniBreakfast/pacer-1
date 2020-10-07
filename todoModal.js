@@ -73,17 +73,25 @@ function updateQuestStatus(quest /* or quest.id */) {
     //якщо передали не обэкт квесту то тоді це його айді
     if (typeof quest != 'object') quest = quests.find(q => q.id == quest)
     if (quest.status != 'ongoing' ) return quest.status
+    
     if (quest.progress >= quest.total) {
         confidence(quest.confidence)
         quest.status = 'done'
+        const activity = activities.find(activity => activity.id == quest.activityID)
+        if (quest.total >= +localStorage.etap &&
+            activity.diff >= quest.confidence/quest.total &&
+            activity.diff > 1) {
+                activity.diff--
+                localStorage.activities = JSON.stringify(activities)
+        }
     }
     else if (todos.some(todo => todo.questID == quest.id && todo.status == 'failed')) { 
+        quest.status = 'failed'
         const activity = activities.find(activity => activity.id == quest.activityID)
         if (activity.diff <= quest.confidence/quest.total) {
             activity.diff++
             localStorage.activities = JSON.stringify(activities)
         }
-        quest.status = 'failed'
     }
     localStorage.quests = JSON.stringify(quests)
     return quest.status
