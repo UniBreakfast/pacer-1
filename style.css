@@ -120,7 +120,7 @@ button:active, .button:active {
 #activityList button, #getQuestModal button, #questList button {
     margin: 0 10px;
 }
-#questList details, #activityInfoModal details {
+#questList details, #activityInfoModal details, #questInfoModal {
     background-color: #044704;
     color: #18d328;
 }

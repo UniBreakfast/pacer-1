@@ -22,6 +22,11 @@ promptGlass.onclick = event => {
         promptGlass.hidden = true
     }
 }
+
+questInfoGlass.onclick = event => {
+    if (event.target == questInfoGlass || event.target.innerText == 'ok')
+        questInfoGlass.hidden = true
+}
 //клік на кнопці взяти квест
 takeQuestBtn.onclick = () => {
     takeNewQuest()

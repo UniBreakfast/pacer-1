@@ -40,6 +40,11 @@ function showQuests() {
                 showQuests()
             }
         }
+        if (label == 'Деталі') {
+            btn.onclick = () => {
+                questInfoGlass.hidden = false
+            }
+        }
     })
 }
 // вивід показника віри в себе на екрані 
