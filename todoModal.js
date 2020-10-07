@@ -67,7 +67,6 @@ function setTodoStatus(todoID, status) {
         updateQuestStatus(quest)
     }
     localStorage.todos = JSON.stringify(todos)
-    localStorage.quests = JSON.stringify(quests)
 }
 //функція для зміни статусу квесту в залежності від плану
 function updateQuestStatus(quest /* or quest.id */) {
@@ -76,9 +75,18 @@ function updateQuestStatus(quest /* or quest.id */) {
     if (quest.status != 'ongoing' ) return quest.status
     if (quest.progress >= quest.total) {
         confidence(quest.confidence)
-        return quest.status = 'done'
+        quest.status = 'done'
     }
-    if (todos.some(todo => todo.questID == quest.id && todo.status == 'failed')) return quest.status = 'failed'
+    else if (todos.some(todo => todo.questID == quest.id && todo.status == 'failed')) { 
+        const activity = activities.find(activity => activity.id == quest.activityID)
+        if (activity.diff <= quest.confidence/quest.total) {
+            activity.diff++
+            localStorage.activities = JSON.stringify(activities)
+        }
+        quest.status = 'failed'
+    }
+    localStorage.quests = JSON.stringify(quests)
+    return quest.status
 }
 //функція для створення нових todo для quest
 function populateQuestTodos(quest) {

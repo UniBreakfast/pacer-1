@@ -65,7 +65,7 @@ function buildQuestItem(quest) {
                 <summary>
                     <span title="квест на діяльність">${activity.name}</span>
                     <span title="міра кожного виконання">${activity.size}</span>
-                    <span title="суб'єктивна складність">${activity.diff}</span>
+                    <span title="суб'єктивна складність">${quest.confidence/quest.total}</span>
                     <span title="дата початку">з ${isoToGOST(quest.from)}</span>
                     <span title="можлива дата завершення">по ${isoToGOST(quest.to)}</span>
                     <span><span title="кількість днів виконання позаду">${quest.progress}/</span><span title="передбачена тривалість квесту">${quest.total} днів</span></span>
