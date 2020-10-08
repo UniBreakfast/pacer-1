@@ -1,6 +1,3 @@
-//обєкт для перетворення статусу з інгл на укр
-const statusUKR = {done: 'завершено', ongoing: 'триває', failed: 'провалено'}
-
 showActivities()
 showQuests()
 showConfidence()

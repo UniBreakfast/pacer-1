@@ -1,3 +1,7 @@
+//обєкт для перетворення статусу з інгл на укр
+const statusUKR = {done: 'завершено', ongoing: 'триває', failed: 'провалено'}
+const weekDaysUKR = ['нд', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб']
+
 // вивід списку діяльностей
 function showActivities() {
     activityList.innerHTML = activities.filter(activity => !activity.archived)
@@ -65,6 +69,13 @@ function dateToISO(dateObject) {
 function isoToGOST(isoDate) {
     const [year, month, date] = isoDate.split('-')
     return `${date}.${month}.${year}`
+}
+// функція для витягування дня з дати
+function isoToWeekDay(isoDate) {
+    const dateObj = new Date(isoDate)
+    const date = dateObj.getDate()
+    const weekDay = weekDaysUKR[dateObj.getDay()]
+    return `${date}, ${weekDay}`
 }
 // функція для інформування про щось
 function showAlert(msg) {
