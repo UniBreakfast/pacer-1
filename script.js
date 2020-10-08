@@ -123,20 +123,7 @@ function takeNewQuest() {
     // записую масив квестів в localStorage
     localStorage.quests = JSON.stringify(quests)
 
-    for (let i = 0; i < newQuest.total; i++) {
-        const date = new Date(newQuest.from)
-        date.setDate(date.getDate() + i)
-        const newTodo = {
-            id: newID(),
-            questID: newQuest.id,
-            date: dateToISO(date),
-            confidence: Math.floor((i+1)**0.5),
-            status: 'planned',
-        }
-        todos.push(newTodo)
-    }
-    // записую масив планів в localStorage
-    localStorage.todos = JSON.stringify(todos)
+    populateQuestTodos(newQuest)
 
     getQuestGlass.hidden = true //закримаэмо модалку  
 }

@@ -100,12 +100,19 @@ function updateQuestStatus(quest /* or quest.id */) {
 function populateQuestTodos(quest) {
     const questTodos = todos.filter(todo => todo.questID == quest.id)
     if (!quest.progress && !questTodos.length) {
-        for (let i = 0; i < newQuest.total; i++) {
-            const date = new Date(newQuest.from)
+        for (let i = 0; i < quest.total; i++) {
+            const date = new Date(quest.from)
+            if (!i) {
+                const activityQuestsIDs = quests.filter(q => q.activityID == quest.activityID)
+                    .map(quest => quest.id)
+                const inertiaTodo = todos.findIndex(todo => todo.date == dateToISO(date) &&
+                    activityQuestsIDs.includes(todo.questID) && todo.status == 'planned')
+                if (inertiaTodo !== -1) todos.splice(inertiaTodo, 1)
+            }
             date.setDate(date.getDate() + i)
             const newTodo = {
                 id: newID(),
-                questID: newQuest.id,
+                questID: quest.id,
                 date: dateToISO(date),
                 confidence: Math.floor((i+1)**0.5),
                 status: 'planned',
