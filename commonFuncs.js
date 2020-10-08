@@ -42,7 +42,7 @@ function showQuests() {
         }
         if (label == 'Деталі') {
             btn.onclick = () => {
-                questInfoGlass.hidden = false
+                showQuestInfoModal(btn.dataset.id)
             }
         }
     })
