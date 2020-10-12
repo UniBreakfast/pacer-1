@@ -9,8 +9,10 @@ activityInfoGlass.onclick = event => {
         }
     }
 }
-
-
+activityInfoModal.querySelector('ul').onclick = event => {
+    const questItem = event.target.closest('li')
+    if (questItem) showQuestInfoModal(questItem.dataset.id)
+}
 // функція для підготовки модального вікна при натисканні кнопки Деталі 
 function prepActivityInfoModal(activity) {
     const inputs = activityInfoModal.querySelectorAll('input')
@@ -33,7 +35,7 @@ function showActivityInfoModal(activityID) {
 //функція для побудови розмітки деталей квесту
 function buildActivityQuest(quest) {
     return `
-        <li>
+        <li data-id="${quest.id}">
             <details>
                 <summary>
                     <span title="дата початку">з ${isoToGOST(quest.from)}</span>
