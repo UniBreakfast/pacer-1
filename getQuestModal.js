@@ -41,7 +41,7 @@ function showGetQuestModal(activityID) {
 // функція для підготовки модального вікна
 function prepGetQuestModal(activity) {
     const maxDuration = Math.floor(confidence() / activity.diff)
-    const duration = Math.floor((maxDuration+1)/2)
+    const duration = Math.floor((maxDuration+1) / 2)
     let date = new Date
     const spans = getQuestModal.querySelectorAll('span')
     
@@ -66,10 +66,11 @@ function prepGetQuestModal(activity) {
     questPledgeInput.value = duration * activity.diff
 
     date = new Date
-    if (duration == 1) {
+    const busyToday = !checkTodayAvailability(activity)
+    if (duration == 1 || busyToday) {
         date.setDate(date.getDate() + 1)
         questFromInput.value = dateToISO(date)
-        if (maxDuration == 1) questFromInput.min = dateToISO(date)
+        if (maxDuration == 1 || busyToday) questFromInput.min = dateToISO(date)
     }
 
     date.setDate(date.getDate() + duration - 1)
@@ -77,7 +78,14 @@ function prepGetQuestModal(activity) {
 
     // збереження ID при натисканні кнопки взяти квест
     takeQuestBtn.dataset.id = activity.id
-
+}
+//функція для перевірки можливості запланувати на сьогодні
+function checkTodayAvailability(activity) {
+    const today = dateToISO(new Date)
+    const todayQuestsIDs = todos.filter(todo => todo.date == today && todo.status != 'planned')
+            .map(todo => todo.questID)
+    const todayQuests = quests.filter(quest => todayQuestsIDs.includes(quest.id))
+    return !todayQuests.some(quest => quest.activityID == activity.id)
 }
 // функція для зміни інпутів відповідно до зміни першого інпута з початковою датою
 function handleChangeFrom() {

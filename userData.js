@@ -16,17 +16,17 @@ if (!localStorage.nextID ||
             {id: 3, name: 'Фізкультура', size: '1 година', diff: 9},
         ])
         localStorage.quests = JSON.stringify([
-            {id: 4, activityID: 1, from: '2020-09-14', to: '2020-09-20',
+            {id: 4, activityID: 1, from: '2020-10-04', to: '2020-10-10',
             progress: 4, total: 7, confidence: 14, status: 'ongoing'},
         ])
         localStorage.todos = JSON.stringify([
-            {id: 5, questID: 4, date: '2020-09-14', confidence: 1, status: 'done'},
-            {id: 6, questID: 4, date: '2020-09-15', confidence: 1, status: 'done'},
-            {id: 7, questID: 4, date: '2020-09-16', confidence: 1, status: 'done'},
-            {id: 8, questID: 4, date: '2020-09-17', confidence: 2, status: 'done'},
-            {id: 9, questID: 4, date: '2020-09-18', confidence: 2, status: 'planned'},
-            {id: 10, questID: 4, date: '2020-09-19', confidence: 2, status: 'planned'},
-            {id: 11, questID: 4, date: '2020-09-20', confidence: 2, status: 'planned'},
+            {id: 5, questID: 4, date: '2020-10-04', confidence: 1, status: 'done'},
+            {id: 6, questID: 4, date: '2020-10-05', confidence: 1, status: 'done'},
+            {id: 7, questID: 4, date: '2020-10-06', confidence: 1, status: 'done'},
+            {id: 8, questID: 4, date: '2020-10-07', confidence: 2, status: 'done'},
+            {id: 9, questID: 4, date: '2020-10-08', confidence: 2, status: 'planned'},
+            {id: 10, questID: 4, date: '2020-10-09', confidence: 2, status: 'planned'},
+            {id: 11, questID: 4, date: '2020-10-10', confidence: 2, status: 'planned'},
         ])
     }
     // початкове визначення віри в себе
