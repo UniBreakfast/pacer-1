@@ -22,33 +22,41 @@
 
 <body>
 
-    <section id="activityView">
-        <details>
-            <summary>Додати діяльність</summary>
+   <main>
+        <div>
+            <section id="activityView">
+                <details>
+                    <summary>Додати діяльність</summary>
+                    <div>
+                        <input id="nameInput" type="text" placeholder="Діяльність">
+                        <input id="sizeInput" type="text" placeholder="Міра">
+                        <input id="diffInput" type="number" placeholder="Складність"
+                            min="1" max="10">
+                        <button id="saveNewActivityBtn">💾</button>
+                    </div>
+                </details>
+        
+                <ul id="activityList" class="brick-list"></ul>
+            </section>
+        
+            <section id="questView">
+                <ul id="questList" class="brick-list"></ul>
+            </section>
+        </div>
+    
+        <aside>
             <div>
-                <input id="nameInput" type="text" placeholder="Діяльність">
-                <input id="sizeInput" type="text" placeholder="Міра">
-                <input id="diffInput" type="number" placeholder="Складність"
-                    min="1" max="10">
-                <button id="saveNewActivityBtn">💾</button>
+                <div id="dateTimeView"></div>
+                <div id="confidenceView" title="Віра в себе"></div>
             </div>
-        </details>
-
-        <ul id="activityList" class="brick-list"></ul>
-    </section>
-
-    <section id="questView">
-        <ul id="questList" class="brick-list"></ul>
-    </section>
-
-    <div id="confidenceView" title="Віра в себе"></div>
-    <div id="dateTimeView"></div>
-
-    <div id="toolbar">
-        <button id="showTodoBtn">План на сьогодні</button>
-        <button id="reportBtn">Звіти</button>
-        <button id="archiveBtn">Архів</button>
-    </div>
+        
+            <div id="toolbar">
+                <button id="showTodoBtn">План на сьогодні</button>
+                <button id="reportBtn">Звіти</button>
+                <button id="archiveBtn">Архів</button>
+            </div>
+        </aside>
+   </main>
 
     <div id="todoGlass" class="glass" hidden>
         <div id="todoModal" class="modal">

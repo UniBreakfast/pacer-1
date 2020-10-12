@@ -4,6 +4,19 @@ body, input {
 body {
     background-color: #1a1616;
 }
+main {
+    display: flex;
+    justify-content: flex-end;
+}
+main>aside {
+    position: relative;
+    width: 180px;
+}
+aside>div:first-child {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px 5px 20px;
+}
 input {
     background-color: #201f1f;
     color: #bbb;
@@ -49,7 +62,6 @@ button:active, .button:active {
 
 #activityView, #questView {
     margin: auto;
-    width: 500px;
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -149,9 +161,6 @@ button:active, .button:active {
 }
 
 #confidenceView {
-    position: absolute;
-    top: 5px;
-    right: 5px;
     border: 1px;
     border-radius: 50%;
     background-color: #c9ae57;
@@ -271,9 +280,6 @@ button:active, .button:active {
     width: 460px;
 }
 #dateTimeView {
-    position: absolute;
-    top: 10px;
-    right: 70px;
     color: #faf9f9;
 }
 #dateTimeView h3 {
@@ -282,9 +288,6 @@ button:active, .button:active {
     text-align: center;
 }
 #toolbar {
-    position: absolute;
-    top: 65px;
-    right: 20px;
     display: flex;
     flex-flow: column;
     align-items: flex-end;
