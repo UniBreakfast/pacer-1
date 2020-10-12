@@ -1,6 +1,11 @@
+questInfoModal.firstElementChild.onclick = () => {
+    showActivityInfoModal(questInfoModal.firstElementChild.dataset.id)
+    questInfoGlass.hidden = true
+}
 // функція для підготовки значень діяльності та квесту в розмітку модалки "деталі" 
 function prepQuestInfoModal(quest) {
     const activity = activities.find(activity => activity.id == quest.activityID)
+    questInfoModal.firstElementChild.dataset.id = activity.id
     const spans = questInfoModal.querySelectorAll('div>span')
     spans[0].innerText = activity.name
     spans[1].innerText = activity.size

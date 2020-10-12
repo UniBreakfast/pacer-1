@@ -95,8 +95,8 @@ button:active, .button:active {
     border-radius: 10px;
     padding: 5px 10px;
     margin: 5px;
-
 } 
+
 .brick-list summary {
     display: flex;
     align-items: center;
@@ -105,7 +105,8 @@ button:active, .button:active {
 #activityInfoModal summary::-webkit-details-marker {
     display:none;
 }
-#activityList details, #activityView details, #archiveModal.activities, #activityInfoModal {
+#activityList details, #activityView details, 
+#archiveModal.activities, #activityInfoModal, #questInfoModal>div:first-child {
     background-color: #423603;
     color: #f0c76f;
 }
@@ -133,6 +134,12 @@ button:active, .button:active {
     font-size: 16px;
     margin: 4px 0;
 }
+#questInfoModal>div:first-child {
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin: 5px;
+}
 #questInfoModal li {
     width: 70%;
     text-align: right;
@@ -140,6 +147,7 @@ button:active, .button:active {
 #questInfoModal p {
     text-align: center;
 }
+
 #confidenceView {
     position: absolute;
     top: 5px;
