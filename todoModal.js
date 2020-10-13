@@ -17,7 +17,7 @@ showTodoBtn.onclick = () => {
 todoList.onclick = event => {
     if (event.target.tagName == 'BUTTON') {
         const status = event.target.innerText == '✔️'? 'done' : 'failed'
-        setTodoStatus(event.target.parentElement.dataset.id, status)
+        setTodoStatus(event.target.closest('li').dataset.id, status)
         showConfidence()
         showTodoToday()
         showQuests()
@@ -37,7 +37,7 @@ function buildTodoItem(todo) {
         <li class="${todo.status}" data-id="${todo.id}">
             ${todo.status == 'done' ? '<span>✔️</span>' 
             : (todo.status == 'failed' ? '<span>❌</span>' 
-            : '<button>✔️</button><button>❌</button>')}
+            : '<span><button>✔️</button><button>❌</button></span>')}
             ${todo.status == 'planned' ? '' : '<div></div>'}
             <span>${activity.name}</span>
             <span>${activity.size}</span>

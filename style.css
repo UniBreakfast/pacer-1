@@ -95,7 +95,6 @@ button:active, .button:active {
 #reportModal button {
     color: #fcaa3f;
 }
-
 .brick-list {
     margin: auto;
     padding: 0;
@@ -108,7 +107,6 @@ button:active, .button:active {
     padding: 5px 10px;
     margin: 5px;
 } 
-
 .brick-list summary {
     display: flex;
     align-items: center;
@@ -224,12 +222,18 @@ button:active, .button:active {
     color: #8FE296 !important;
 }
 #todoList li, #reportModal .todos li {
-    
-    width: 400px;
+    margin: auto;
+    width: 450px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
+}
+#todoList span:first-child, #overdueTodoList .todos span:first-child {
+    white-space: nowrap;
+}
+#todoList button, #overdueTodoList button {
+    min-width: 38px;
 }
 #todoList .failed, #overdueTodoList .failed {
     color: red;
@@ -238,7 +242,13 @@ button:active, .button:active {
     color: lime;
 }
 #todoList span:nth-child(2) {
-    width: 60%;
+    width: 55%;
+}
+#todoList span:not(:last-child), #overdueTodoList .todos span:not(:last-child) {
+    margin-right: 5px;
+}
+#todoList span:last-child, #overdueTodoList .todos span:last-child {
+    margin-left: 5px;
 }
 #todoList div, #overdueTodoList div {
     position: absolute;

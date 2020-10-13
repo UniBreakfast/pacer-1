@@ -17,7 +17,7 @@ reportBtn.onclick = () => {
     overdueTodoList.onclick = event => {
         if (event.target.tagName == 'BUTTON') {
             const status = event.target.innerText == '✔️'? 'done' : 'failed'
-            setTodoStatus(event.target.parentElement.dataset.id, status)
+            setTodoStatus(event.target.closest('li').dataset.id, status)
             showConfidence()
             showTodoToday()
             showOverdueTodos()
@@ -55,7 +55,7 @@ function buildOverdueTodoItem(todo) {
         <li class="${todo.status}" data-id="${todo.id}">
             ${todo.status == 'done' ? '<span>✔️</span>' 
             : todo.status == 'failed' ? '<span>❌</span>' 
-            : first ? '<button>✔️</button><button>❌</button>' : ''}
+            : first ? '<span><button>✔️</button><button>❌</button></span>' : ''}
             ${todo.status == 'planned' ? '' : '<div></div>'}
             <span>${activity.name}</span>
             <span>${activity.size}</span>

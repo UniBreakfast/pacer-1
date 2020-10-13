@@ -29,7 +29,6 @@ function throttle(handler) {
         }, 1000)
     }
 }
-
 // показ модального вікна з розрахунками параметрів квесту
 function showGetQuestModal(activityID) {
     const activity = activities.find(activity => activityID == activity.id)
