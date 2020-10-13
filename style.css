@@ -293,10 +293,31 @@ button:active, .button:active {
     align-items: flex-end;
 }
 #toolbar button {
+    position: relative;
     margin: 3px;
     min-width: 70px;
 }
-
+#showTodoBtn:not([data-count="0"])::after, #reportBtn:not([data-count="0"])::after {
+    content: attr(data-count);
+    color: white;
+    background: red;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 13px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#showTodoBtn::after {
+    left: 35px;
+    top: 21px;
+}
+#reportBtn::after {
+    left: -7px;
+    top: 7px;
+}
 [hidden] {
     display: none !important;
 }

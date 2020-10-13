@@ -2,7 +2,10 @@ showActivities()
 showQuests()
 showConfidence()
 // показ дати і часу через кожну секунду
-setInterval(showDateTime, 1000)
+setInterval(()=>{
+    showDateTime()
+    showTodoCount()
+}, 1000)
 // виконуємо функції щоразу коли додається нова діяльність(activity)
 saveNewActivityBtn.onclick = () => {
     saveNewActivity()

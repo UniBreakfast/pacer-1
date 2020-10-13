@@ -95,6 +95,12 @@ function showPrompt(msg, type, handler) {
 function showDateTime() {
     dateTimeView.innerHTML = `<div>${getCurrentDate()}</div><h3>${getCurrentTime()}</h3>`
 }
+function showTodoCount() {
+    showTodoBtn.dataset.count = todos.filter(todo => 
+        todo.date == dateToISO(new Date) && todo.status == 'planned').length
+    reportBtn.dataset.count = todos.filter(todo => 
+        todo.date < dateToISO(new Date) && todo.status == 'planned').length
+}
 // функція для визначення поточної дати
 function getCurrentDate() {
     return isoToGOST(dateToISO(new Date))
