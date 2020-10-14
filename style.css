@@ -151,11 +151,15 @@ button:active, .button:active {
     margin: 5px;
 }
 #questInfoModal li {
-    width: 70%;
+    width: 75%;
     text-align: right;
 }
 #questInfoModal li>span {
     margin: 0 15px;
+}
+#questInfoModal li>span:nth-child(2) {
+    display: inline-block;
+    width: 50px;
 }
 #questInfoModal p {
     text-align: center;
@@ -238,10 +242,10 @@ button:active, .button:active {
 #todoList button, #overdueTodoList button, #questInfoModal li button {
     min-width: 38px;
 }
-#todoList .failed, #overdueTodoList .failed {
+#todoList .failed, #overdueTodoList .failed, #questInfoModal .failed {
     color: red;
 }
-#todoList .done, #overdueTodoList .done {
+#todoList .done, #overdueTodoList .done, #questInfoModal done {
     color: lime;
 }
 #todoList span:nth-child(2) {

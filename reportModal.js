@@ -19,7 +19,6 @@ reportBtn.onclick = () => {
             const status = event.target.innerText == '✔️'? 'done' : 'failed'
             setTodoStatus(event.target.closest('li').dataset.id, status)
             showConfidence()
-            showTodoToday()
             showOverdueTodos()
             showQuests()
             showActivities()

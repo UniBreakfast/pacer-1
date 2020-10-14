@@ -2,6 +2,20 @@ questInfoModal.firstElementChild.onclick = () => {
     showActivityInfoModal(questInfoModal.firstElementChild.dataset.id)
     questInfoGlass.hidden = true
 }
+questInfoModal.querySelector('ul').onclick = event => {
+    if (event.target.tagName == 'BUTTON') {
+        const status = event.target.innerText == '✔️'? 'done' : 'failed'
+        const todoID = event.target.closest('li').dataset.id
+        const {questID} = todos.find(todo => todo.id == todoID)
+        const quest = quests.find(quest => quest.id == questID)
+        setTodoStatus(todoID, status)
+        showConfidence()
+        showActivities()
+        showQuests()
+        prepQuestInfoModal(quest)
+    }
+}
+
 // функція для підготовки значень діяльності та квесту в розмітку модалки "деталі" 
 function prepQuestInfoModal(quest) {
     const activity = activities.find(activity => activity.id == quest.activityID)
@@ -28,7 +42,7 @@ function showQuestInfoModal(questID) {
 // побудова елементу списку звітів по датам
 function buildQuestTodoItem(todo, i, todos) {
     return `
-        <li>
+        <li class="${todo.status}" data-id="${todo.id}">
             <span>
                 ${todo.status == 'done' ? '✔️' 
                 : (todo.status == 'failed' ? '❌' 

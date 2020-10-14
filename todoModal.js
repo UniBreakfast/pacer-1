@@ -63,7 +63,7 @@ function setTodoStatus(todoID, status) {
     } else {
         const canceledTodos = todos.filter(todo => todo.questID == quest.id && todo.status == 'planned')
         canceledTodos.forEach(todo => todo.status = 'failed')
-        todos = todos.filter(todo => !canceledTodos.includes(todo))
+        if (quest.status != 'ongoing') todos = todos.filter(todo => !canceledTodos.includes(todo))
         updateQuestStatus(quest)
     }
     localStorage.todos = JSON.stringify(todos)
