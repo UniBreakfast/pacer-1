@@ -13,6 +13,8 @@ questInfoModal.querySelector('ul').onclick = event => {
         showActivities()
         showQuests()
         prepQuestInfoModal(quest)
+        if (quest.status == 'done') 
+            event.currentTarget.lastElementChild.scrollIntoView({behavior:'smooth'})
     }
 }
 
@@ -46,7 +48,7 @@ function buildQuestTodoItem(todo, i, todos) {
             <span>
                 ${todo.status == 'done' ? '✔️' 
                 : (todo.status == 'failed' ? '❌' 
-                : i && todos[i-1].status != 'done' ? ''
+                : i && todos[i-1].status != 'done' || todo.date > dateToISO(new Date) ? ''
                 : '<span><button>✔️</button><button>❌</button></span>')}
             </span>
             <span>${isoToWeekDay(todo.date)}</span>
