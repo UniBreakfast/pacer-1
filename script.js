@@ -78,7 +78,6 @@ function buildQuestItem(quest) {
                     <span title="статус квесту">${statusUKR[quest.status]}</span>
                 </summary>
                 <div>
-                    <button>Провалити</button>
                     <button data-id="${quest.id}">Деталі</button>
                     ${quest.status == 'ongoing'? '':
                         `<button data-id="${quest.id}">В архів</button>`}
