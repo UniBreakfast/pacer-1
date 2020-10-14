@@ -33,10 +33,10 @@ function buildQuestTodoItem(todo, i, todos) {
                 ${todo.status == 'done' ? '✔️' 
                 : (todo.status == 'failed' ? '❌' 
                 : i && todos[i-1].status != 'done' ? ''
-                : '<button>✔️</button><button>❌</button>')}
+                : '<span><button>✔️</button><button>❌</button></span>')}
             </span>
             <span>${isoToWeekDay(todo.date)}</span>
-            +<span>${todo.confidence}</span>
+            <span>+${todo.confidence}</span>
         </li>
     `
 }

@@ -3,7 +3,7 @@
 // масив обєктів для зберігання квестів
 // плани на виконання квесту
 // пов'язуємо всі дані між собою
-if (location.hostname !== '127.0.0.1') {
+if (location.hostname !== '127.0.0.1') { // локалсторедж з хостингу гіта
     if (!localStorage.nextID ||
         !localStorage.confidence ||
         !localStorage.activities ||
@@ -15,7 +15,7 @@ if (location.hostname !== '127.0.0.1') {
             localStorage.quests = JSON.stringify([])
             localStorage.todos = JSON.stringify([])
         }
-} else {
+} else { // локальний локалсторедж
     if (!localStorage.nextID ||
         !localStorage.confidence ||
         !localStorage.activities ||
