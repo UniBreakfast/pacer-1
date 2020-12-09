@@ -47,7 +47,17 @@ function buildTodoItem(todo) {
 }
 // функція для виводу планів на сьогодні
 function showTodoToday() {
-    todoList.innerHTML = todos.filter(todo => todo.date == dateToISO(new Date))
+    todoList.innerHTML = todos.filter(todo => {
+        const date = new Date
+        if (todo.date != dateToISO(date)) return
+        else if (todo.status !== 'failed') return true
+        const quest = quests.find(quest => quest.id == todo.questID)
+        //const yesterday = new Date(date - 86400000)
+        date.setDate(date.getDate() - 1)
+        const alreadyFailed = todos.find(todo => todo.questID == quest.id 
+            && todo.date == (dateToISO(date)) && todo.status == 'failed')
+        return !alreadyFailed
+    })
         .map(buildTodoItem).join('')
 } 
 // функція для зміни статусу плану і кількості очок
@@ -100,6 +110,14 @@ function updateQuestStatus(quest /* or quest.id */) {
 function populateQuestTodos(quest) {
     const questTodos = todos.filter(todo => todo.questID == quest.id)
     if (!quest.progress && !questTodos.length) {
+        const date = new Date(quest.from)
+        date.setDate(date.getDate() - 1) 
+        const yesterdayTodos = todos.filter(todo => todo.date == dateToISO(date) && todo.status == 'done')
+        const lastTodo = yesterdayTodos.find(todo => {
+            const q = quests.find(quest => quest.id == todo.questID) 
+            return quest.activityID == q.activityID
+        })
+        const n = lastTodo?.n || 0
         for (let i = 0; i < quest.total; i++) {
             const date = new Date(quest.from)
             if (!i) {
@@ -110,12 +128,14 @@ function populateQuestTodos(quest) {
                 if (inertiaTodo !== -1) todos.splice(inertiaTodo, 1)
             }
             date.setDate(date.getDate() + i)
+
             const newTodo = {
                 id: newID(),
                 questID: quest.id,
                 date: dateToISO(date),
                 confidence: Math.floor((i+1)**0.5),
                 status: 'planned',
+                n: i + n + 1,
             }
             todos.push(newTodo)
         }

@@ -33,13 +33,13 @@ if (location.hostname !== '127.0.0.1') { // локалсторедж з хост
                 progress: 4, total: 7, confidence: 14, status: 'ongoing'},
             ])
             localStorage.todos = JSON.stringify([
-                {id: 5, questID: 4, date: '2020-10-04', confidence: 1, status: 'done'},
-                {id: 6, questID: 4, date: '2020-10-05', confidence: 1, status: 'done'},
-                {id: 7, questID: 4, date: '2020-10-06', confidence: 1, status: 'done'},
-                {id: 8, questID: 4, date: '2020-10-07', confidence: 2, status: 'done'},
-                {id: 9, questID: 4, date: '2020-10-08', confidence: 2, status: 'planned'},
-                {id: 10, questID: 4, date: '2020-10-09', confidence: 2, status: 'planned'},
-                {id: 11, questID: 4, date: '2020-10-10', confidence: 2, status: 'planned'},
+                {id: 5, questID: 4, date: '2020-10-04', confidence: 1, status: 'done', n: 1},
+                {id: 6, questID: 4, date: '2020-10-05', confidence: 1, status: 'done', n: 2},
+                {id: 7, questID: 4, date: '2020-10-06', confidence: 1, status: 'done', n: 3},
+                {id: 8, questID: 4, date: '2020-10-07', confidence: 2, status: 'done', n: 4},
+                {id: 9, questID: 4, date: '2020-10-08', confidence: 2, status: 'planned', n: 5},
+                {id: 10, questID: 4, date: '2020-10-09', confidence: 2, status: 'planned', n: 6},
+                {id: 11, questID: 4, date: '2020-10-10', confidence: 2, status: 'planned', n: 7},
             ])
         }
 }
