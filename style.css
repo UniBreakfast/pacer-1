@@ -109,7 +109,7 @@ button:active, .button:active {
     border: 1px solid;
     border-radius: 10px;
     padding: 5px 10px;
-    margin: 5px;
+    margin: 5px auto;
 } 
 .brick-list summary {
     display: flex;
@@ -185,7 +185,7 @@ button:active, .button:active {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #fff5;
+    background-color: #6664;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -261,9 +261,11 @@ button:active, .button:active {
     margin-left: 5px;
 }
 #todoList div, #overdueTodoList div {
+    height: 2px;
+    opacity: 0.6;
+    transform: rotate(-1deg) translateX(10px);
     position: absolute;
     width: 90%;
-    height: 3px;
     right: 0;
 }
 #todoList .failed div, #overdueTodoList .failed div {

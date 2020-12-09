@@ -13,6 +13,12 @@ Object.assign(saveLoadBar.style, {
     left: '20px',
 })
 
+document.body.onkeydown = (event) => {
+    if(event.code == 'KeyL' && event.ctrlKey) {
+        saveLoadBar.querySelector('[type="file"]').click()
+        event.preventDefault()
+    }
+}
 // функція для самостійного кліка на анкор і зберігання файлу
 function saveState() {
     const state = {
