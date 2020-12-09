@@ -109,7 +109,7 @@ Date.customTimeline = function ({
 tl = Date.customTimeline({current: new Date(2020,9,15)}) 
 
 DateOriginal = Date
-Date = function Date(...args) {
-    return args.length ? new DateOriginal(...args) : tl.now
-}
+// Date = function Date(...args) {
+//     return args.length ? new DateOriginal(...args) : tl.now
+// }
 Object.setPrototypeOf(Date, DateOriginal)
