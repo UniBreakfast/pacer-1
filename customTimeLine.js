@@ -112,4 +112,4 @@ DateOriginal = Date
 // Date = function Date(...args) {
 //     return args.length ? new DateOriginal(...args) : tl.now
 // }
-Object.setPrototypeOf(Date, DateOriginal)
+//Object.setPrototypeOf(Date, DateOriginal)
